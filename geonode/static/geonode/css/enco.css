@@ -1,0 +1,115 @@
+div.navbar .nav-logo {
+    height: 100px;
+    margin: 3px 10px -15px 126px;
+    background-color: #FFFFFF;
+    background: url("../img/logo-gn.png") no-repeat scroll 0 0 transparent;
+    width: 97px;
+}
+
+.nav-logo {
+    background: transparent;
+    float: left;
+    height: 30px;
+    margin-bottom: 7px;
+    margin-top: 3px;
+    overflow: hidden;
+    text-indent: -9999em;
+    width: 130px;
+}
+
+body nav.main-nav {
+    margin: 4px 0 4px 126px;
+}
+
+
+body .navbar .navbar-inner {
+    background: url("../img/body_bg.jpg") no-repeat fixed center top #3A5170;	
+    box-shadow: none;
+}
+
+body .navbar .nav > li > a {
+    color: #000000;
+    float: none;
+    line-height: 19px;
+    padding: 1.5px 10px 3.5px;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+body .navbar-fixed-top .container, body .navbar-fixed-bottom .container {
+    width: 100%;
+}
+
+/*
+#ext-gen39 {
+ 	margin: 38px 0px 0px;
+}
+*/
+
+body #paneltbar {
+    margin-top: 157px;
+}
+
+
+
+/* Colour customizations */
+
+
+body {
+	background: url("../img/body_bg.jpg") no-repeat fixed center top #3A5170;	
+}
+
+.nav-box {
+    background: none repeat scroll 0 0 #FF2020 !important;
+}
+
+body.home .content-wrap, .content-wrap {
+    background: url("../img/middle_bg_small_fixed.png") repeat-y scroll 0 0 transparent;
+    margin: 0 auto 30px;
+    min-height: 400px;
+    padding: 30px 0 0 20px;
+    width: 990px;
+}
+
+nav.main-nav ul li a {
+    border: 0 none;
+    color: #FFFFFF;
+    display: block;
+    float: left;
+    font-family: 'Lato',sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 4px 17px;
+    text-transform: uppercase;
+}
+
+#slide-pane .nav a.active {
+    color: #FF2020;
+}
+#slide-pane .nav a {
+    color: #484748;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0.8em;
+}
+
+body .hero-unit {
+    margin: 60px 0 0;
+    padding: 0 20px 20px 0;
+}
+
+.btn.btn-info {
+    background: none repeat scroll 0 0 #FF2020 !important;
+}
+.btn {
+    background: none repeat scroll 0 0 #3CB3C5;
+}
+.btn.btn-primary {
+    background: none repeat scroll 0 0 #FF2020 !important;
+}
+
+.hero-unit .btn {
+    background: none repeat scroll 0 0 #FF2020 !important;
+}
+
+

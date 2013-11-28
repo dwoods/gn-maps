@@ -23,10 +23,12 @@ from geonode.catalogue import default_catalogue_backend
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from geonode.utils import ogc_server_settings
+from geonode.maps.models import Map
 
 def resource_urls(request):
     """Global values to pass to templates"""
     site = Site.objects.get_current()
+    maps = Map.objects.all()
 
     return dict(
         STATIC_URL=settings.STATIC_URL,
@@ -43,5 +45,6 @@ def resource_urls(request):
         DEBUG_STATIC = getattr(settings, "DEBUG_STATIC", False),
         MF_PRINT_ENABLED = ogc_server_settings.MAPFISH_PRINT_ENABLED,
         PRINTNG_ENABLED = ogc_server_settings.PRINTNG_ENABLED,
-        GS_SECURITY_ENABLED = ogc_server_settings.GEONODE_SECURITY_ENABLED
+        GS_SECURITY_ENABLED = ogc_server_settings.GEONODE_SECURITY_ENABLED,
+        MAPS = maps
     )

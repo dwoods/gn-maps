@@ -112,6 +112,14 @@
                   <li id="nav_home">
                     <a href="{% url "home" %}">{% trans "Home" %}</a>
                   </li>
+
+                  {% for map in MAPS %}
+                       <li>
+                       <a href="{% url "map_view" map.pk %}">{{ map.title }}</a> 
+                       </li>
+                  {% endfor %}
+
+                  {% comment %}
                   <li id="nav_data">
                     <a href="{% url "layer_browse" %}">{% trans "Layers" %}</a>
                   </li>
@@ -130,6 +138,8 @@
                   <li id="nav_search">
                     <a href="{% url "advanced_search" %}">{% trans "Search" %}</a>
                   </li>
+                  {% endcomment %}
+
                   {% block extra-nav %}{% endblock %}
                 </ul>
               </nav>
