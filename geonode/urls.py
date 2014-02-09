@@ -90,6 +90,10 @@ urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
                                   {'sitemaps': sitemaps}, name='sitemap'),
     (r'^i18n/', include('django.conf.urls.i18n')),
+
+    (r'^admin/filebrowser/', include(site.urls)),
+    (r'^grappelli/', include('grappelli.urls')),
+    
     (r'^admin/', include(admin.site.urls)),
 
     )

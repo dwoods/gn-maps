@@ -101,6 +101,8 @@ setup(name='GeoNode',
         "agon-ratings==0.2",
         "South==0.7.3",
         "django-downloadview==1.2",
+        "django-filebrowser",
+        "django-embed-video",
         #catalogue
         "pycsw>=1.6.0",
         # setup
