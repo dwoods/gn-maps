@@ -99,10 +99,11 @@ setup(name='GeoNode',
         "geonode-avatar==2.1.1",
         "dialogos==0.2",
         "agon-ratings==0.2",
-        "South==0.7.3",
+        "South",
         "django-downloadview==1.2",
         "django-filebrowser",
         "django-embed-video",
+        "django-filer",
         #catalogue
         "pycsw>=1.6.0",
         # setup

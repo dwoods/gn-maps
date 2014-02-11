@@ -159,9 +159,12 @@ INSTALLED_APPS = (
 
     # Apps bundled with Django
     'django.contrib.auth',
+    'polymorphic',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'grappelli',
+    'filebrowser',
     'django.contrib.admin',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
@@ -169,6 +172,8 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
 
     # Third party apps
+    'filer',
+    'easy_thumbnails',
 
     # Utility
     'pagination',
