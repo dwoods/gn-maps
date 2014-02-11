@@ -76,6 +76,7 @@ class MediaItemParentAdmin(PolymorphicParentModelAdmin):
         (ImageMediaItem, ImageMediaItemAdmin),
         (ExternalVideoMediaItem, ExternalVideoMediaItemAdmin),
     )
+    polymorphic_list = True
     readonly_fields = ('thumbnail',)
     list_display = ('title', 'location', 'thumbnail')
     list_filter = ('location',)

@@ -26,7 +26,7 @@ class MediaItem(ShowFieldTypeAndContent, PolymorphicModel):
         return self.title
 
     def thumbnail(self):
-        return 'BASE'
+        return ''
 
 class TextMediaItem(MediaItem):
 
@@ -50,10 +50,9 @@ class ImageMediaItem(MediaItem):
 
     def thumbnail(self):
         if self.image and self.image.filetype == "Image":
-            return '<img src="%s" style="height: 100px; width: 130px;"/ />' % self.image.version_generate('thumbnail').url
+            return '<img src="%s" />' % self.image.url_thumbnail
         else:
-            return "blah"
-        return "blah"
+            return ""
     thumbnail.allow_tags = True
 
 
@@ -67,7 +66,7 @@ class ExternalVideoMediaItem(MediaItem):
     def thumbnail(self):
         try:
             backend = detect_backend(self.video)
-            return '<img src="%s" style="height: 100px; width: 130px;"/>' % backend.get_thumbnail_url()
+            return '<img src="%s" style="height: 60px;" />' % backend.get_thumbnail_url()
         except UnknownBackendException:
             return '';
     thumbnail.allow_tags = True
