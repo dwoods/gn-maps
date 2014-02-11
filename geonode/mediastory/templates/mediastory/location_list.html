@@ -1,0 +1,52 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{%  block extra_head %}
+
+    {%  include 'mediastory/mediastory_head.html' %}
+
+{%  endblock %}
+
+{% block title %} {% trans "Location Media Test" %} — {{ block.super }} {% endblock %}
+
+{% block body %}
+  <header class="jumbotron subhead" id="overview">
+    <h1>{% trans "Location Media Test" %}</h1>
+    <p class="lead">{% trans "This is a test page to show the media overlay functionality." %}</p>
+  </header>
+
+  <ul>
+  {% for location in locations %}
+    <li id="location-{{ location.id }}"><a href="#">{{ location.name }}</a></li>
+  {% endfor %}
+  </ul>
+
+{% endblock %}
+
+{% block extra_script %}
+    {%  include "mediastory/mediastory_js.html" %}
+
+    <script type="text/javascript">
+    {% for location in locations %}
+        $("#location-{{ location.id }} a").click(function() {
+          $.lightbox([
+
+              {% for mediaitem in location.mediaitem_set.all %}
+                {
+                  href   : "{% url 'mediaitem_detail' mediaitem.id %}",
+                  modal  : true,
+                  width  : 1000,
+                  height : 750,
+                  title  : "{{ location.name }} : {{ mediaitem.title }}"
+                },
+              {%  endfor %}
+
+              ]);
+
+
+              return false;
+        });
+    {% endfor %}
+      </script>
+{% endblock extra_script %}

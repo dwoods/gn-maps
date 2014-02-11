@@ -1,0 +1,33 @@
+{%  load polytype %}{% load embed_video_tags %}{% load fb_versions %}
+
+
+<div class="mediaitem-container">
+
+    <h2>{{ mediaitem.title }}</h2>
+
+    <div class="mediaitem-content">
+
+    {% with mediaitem|modeltype as modeltype %}
+        {% if modeltype == "TextMediaItem" %}
+
+            {{  mediaitem.text|safe }}
+
+        {% elif modeltype == "ImageMediaItem" %}
+
+            <img src="{% version mediaitem.image 'medium' %}" />
+
+            <div class="img-caption">
+                <p>{{ mediaitem.image.caption }}</p>
+            </div>
+
+        {% elif modeltype == "ExternalVideoMediaItem" %}
+
+            {% video mediaitem.video 'large' %}
+
+        {%  endif %}
+    {%  endwith %}
+
+
+    </div>
+
+</div>

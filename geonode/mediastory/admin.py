@@ -1,9 +1,11 @@
+from embed_video.admin import AdminVideoMixin
+
 __author__ = 'dwoods'
 
 from django.contrib import admin
 from django.forms import ModelForm, Media
 from polymorphic.admin import PolymorphicParentModelAdmin, PolymorphicChildModelAdmin
-from .models import MediaItem, ImageMediaItem, TextMediaItem, Location
+from .models import MediaItem, ImageMediaItem, TextMediaItem, Location, ExternalVideoMediaItem
 from suit_redactor.widgets import RedactorWidget
 
 
@@ -24,10 +26,19 @@ class MediaItemEditor(ModelForm):
         }
 
 
+class MediaItemInline(admin.TabularInline):
+    model = MediaItem
+    fields = ('title', 'thumbnail')
+    readonly_fields = ('title', 'thumbnail')
+    extra = 0
+
+
 
 class LocationAdmin(admin.ModelAdmin):
     model = Location
-
+    inlines = [
+        MediaItemInline,
+    ]
 
 
 class MediaItemAdmin(PolymorphicChildModelAdmin):
@@ -40,14 +51,22 @@ class MediaItemAdmin(PolymorphicChildModelAdmin):
     base_fieldsets = (
     )
 
+
 class TextMediaItemAdmin(MediaItemAdmin):
-    # define custom features here
+
     model = TextMediaItem
 
-class ImageMediaItemAdmin(MediaItemAdmin):
-    # define custom features here
-    model = ImageMediaItem
+    list_display = ('title', 'thumbnail')
 
+class ImageMediaItemAdmin(MediaItemAdmin):
+
+    model = ImageMediaItem
+    list_display = ('title', 'thumbnail')
+
+class ExternalVideoMediaItemAdmin(AdminVideoMixin, MediaItemAdmin):
+
+    model = ExternalVideoMediaItem
+    list_display = ('title', 'thumbnail')
 
 class MediaItemParentAdmin(PolymorphicParentModelAdmin):
     """ The parent model admin """
@@ -55,7 +74,11 @@ class MediaItemParentAdmin(PolymorphicParentModelAdmin):
     child_models = (
         (TextMediaItem, TextMediaItemAdmin),
         (ImageMediaItem, ImageMediaItemAdmin),
+        (ExternalVideoMediaItem, ExternalVideoMediaItemAdmin),
     )
+    readonly_fields = ('thumbnail',)
+    list_display = ('title', 'location', 'thumbnail')
+    list_filter = ('location',)
 
 # Only the parent needs to be registered:
 admin.site.register(Location, LocationAdmin)

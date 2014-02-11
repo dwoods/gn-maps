@@ -177,6 +177,7 @@ INSTALLED_APPS = (
     'suit_redactor',
     'filer',
     'easy_thumbnails',
+    'embed_video',
 
     # Utility
     'pagination',

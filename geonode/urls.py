@@ -83,6 +83,9 @@ urlpatterns = patterns('',
     url(r'^account/ajax_lookup$', 'geonode.views.ajax_lookup',
                                        name='account_ajax_lookup'),
 
+    (r'^mediastory/', include('geonode.mediastory.urls')),
+
+
     # Meta
     url(r'^lang\.js$', TemplateView.as_view(template_name='lang.js', content_type='text/javascript'), name='lang'),
     url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog',
