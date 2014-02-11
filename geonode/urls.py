@@ -21,7 +21,6 @@ from django.conf.urls import include, patterns, url
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
-from filebrowser.sites import site
 from geonode.sitemap import LayerSitemap, MapSitemap
 from django.views.generic import TemplateView
 
@@ -92,9 +91,8 @@ urlpatterns = patterns('',
                                   {'sitemaps': sitemaps}, name='sitemap'),
     (r'^i18n/', include('django.conf.urls.i18n')),
 
-    (r'^admin/filebrowser/', include(site.urls)),
-    (r'^grappelli/', include('grappelli.urls')),
-    
+    (r'^admin/filebrowser/', include('filebrowser.urls')),
+
     (r'^admin/', include(admin.site.urls)),
 
     )

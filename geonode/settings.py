@@ -120,8 +120,10 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+FILEBROWSER_DIRECTORY = 'media/'
+FILEBROWSER_VERSIONS_BASEDIR = '_versions'
+FILEBROWSER_SUIT_TEMPLATE = True
 
-VERSIONS_BASEDIR = '_versions'
 
 # Note that Django automatically includes the "templates" dir in all the
 # INSTALLED_APPS, se there is no need to add maps/templates or admin/templates
@@ -163,7 +165,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'grappelli',
+    'suit',
     'filebrowser',
     'django.contrib.admin',
     'django.contrib.sitemaps',
@@ -172,6 +174,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
 
     # Third party apps
+    'suit_redactor',
     'filer',
     'easy_thumbnails',
 
@@ -211,6 +214,8 @@ INSTALLED_APPS = (
     'geonode.social',
     'geonode.catalogue',
     'geonode.documents',
+
+    'geonode.mediastory',
 )
 
 LOGGING = {
