@@ -1,6 +1,6 @@
 {% extends "site_base.html" %}
 
-{% load i18n %}
+{% load i18n %}{% load leaflet_tags %}
 
 {%  block extra_head %}
 
@@ -20,7 +20,9 @@
   {% for location in locations %}
     <li id="location-{{ location.id }}"><a href="#">{{ location.name }}</a></li>
   {% endfor %}
-  </ul>
+  </ul>a
+
+  {% leaflet_map 'leaflet_map' %}
 
 {% endblock %}
 
