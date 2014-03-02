@@ -37,6 +37,16 @@
         // Main map setup function
         function main_map_init (map, options) {
 
+            var reserves_pl = L.tileLayer.wms("{{ GEOSERVER_BASE_URL }}wms", {
+                layers: 'opengeo:gn_reserves',
+                format: 'image/png',
+                transparent: true,
+                version: '1.1.0',
+                attribution: "myattribution"
+            });
+
+            reserves_pl.addTo(map);
+
             var marker;
 
              {% for location in locations %}
