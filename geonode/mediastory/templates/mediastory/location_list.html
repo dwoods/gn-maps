@@ -16,23 +16,12 @@
     <p class="lead">{% trans "This is a test page to show the media overlay functionality." %}</p>
   </header>
 
-  <ul>
-  {% for location in locations %}
-    <li id="location-{{ location.id }}"><a href="#">{{ location.name }}</a></li>
-  {% endfor %}
-  </ul>
-
-
-    {% leaflet_map "main" callback="main_map_init" %}
-
-    <script type="text/javascript">
-    </script>
-
-
+  {% leaflet_map "main" callback="main_map_init" %}
 
 {% endblock %}
 
 {% block extra_script %}
+
     {%  include "mediastory/mediastory_js.html" %}
 
     <script type="text/javascript">
@@ -40,13 +29,13 @@
         // Main map setup function
         function main_map_init (map, options) {
 
-            var marker = {};
+            var marker;
 
              {% for location in locations %}
 
                 marker = new CustomMarker([{{ location.position.latitude }}, {{ location.position.longitude }}], {});
 
-                marker.bindPopup("<h3>{{ location.name }}</h3><p>This is a description of the village, etc ,etc</p><p>It's pretty nice actually!</p>", {
+                marker.bindPopup('<h3>{{ location.name }}</h3> {{ location.description|safe|escapejs }}', {
                     showOnMouseOver: true
                 });
 
@@ -85,5 +74,6 @@
         }
 
     </script>
+
 
 {% endblock extra_script %}

@@ -4,14 +4,13 @@ from embed_video.fields import EmbedVideoField
 from polymorphic import PolymorphicModel, ShowFieldType, ShowFieldTypeAndContent
 from filebrowser.settings import ADMIN_THUMBNAIL
 from geoposition.fields import GeopositionField
-
-# Create your models here.
 from filebrowser.fields import FileBrowseField
 
 
 class Location(models.Model):
     name = models.CharField("Name", max_length=100, blank=False, null=False)
-    # loc = PlainLocationField(based_fields=[name], zoom=8, default=Point(51.306, -127.150))
+    description = models.TextField("Description", blank=True, null=True)
+    population = models.IntegerField("Population", blank=True, null=True)
     position = GeopositionField()
 
     def __unicode__(self):
@@ -31,9 +30,10 @@ class MediaItem(ShowFieldTypeAndContent, PolymorphicModel):
     def thumbnail(self):
         return ''
 
+
 class TextMediaItem(MediaItem):
 
-    text = models.TextField(help_text='Editor Redactor')
+    text = models.TextField(help_text='Story text')
 
     class Meta:
         verbose_name = "Text"
@@ -41,7 +41,6 @@ class TextMediaItem(MediaItem):
     def thumbnail(self):
         return 'TEXT'
     thumbnail.allow_tags = True
-
 
 
 class ImageMediaItem(MediaItem):

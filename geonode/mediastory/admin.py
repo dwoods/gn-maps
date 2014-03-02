@@ -10,6 +10,19 @@ from .models import MediaItem, ImageMediaItem, TextMediaItem, Location, External
 from suit_redactor.widgets import RedactorWidget
 
 
+
+class LocationEditor(ModelForm):
+    class Meta:
+        widgets = {
+            'description': RedactorWidget(editor_options={'lang': 'en', 'minHeight': 100}),
+            }
+
+    class Media:
+        js = ('filebrowser/js/FB_Redactor.js',)
+        css = {
+            'all': ('filebrowser/css/suit-filebrowser.css',)
+        }
+
 class MediaItemEditor(ModelForm):
     class Meta:
         widgets = {
@@ -21,7 +34,7 @@ class MediaItemEditor(ModelForm):
         }
 
     class Media:
-        js = ('filebrowser/js/FB_CKEditor.js', 'filebrowser/js/FB_Redactor.js')
+        js = ('filebrowser/js/FB_Redactor.js')
         css = {
             'all': ('filebrowser/css/suit-filebrowser.css',)
         }
@@ -37,6 +50,7 @@ class MediaItemInline(admin.TabularInline):
 
 class LocationAdmin(admin.ModelAdmin):
     model = Location
+    form = LocationEditor
 
 
 class MediaItemAdmin(PolymorphicChildModelAdmin):
