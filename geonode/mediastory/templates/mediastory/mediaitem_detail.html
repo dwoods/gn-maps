@@ -2,8 +2,10 @@
 
 
 <div class="mediaitem-container">
+    <div class="title-area">
+        <h1>{{  mediaitem.location.name  }}</h1>
+    </div>
 
-    <h2>{{ mediaitem.title }}</h2>
 
     <div class="mediaitem-content">
 
@@ -26,6 +28,8 @@
 
         {%  endif %}
     {%  endwith %}
+
+        <h2> {{ mediaitem.title }}</h2>
 
 
     </div>

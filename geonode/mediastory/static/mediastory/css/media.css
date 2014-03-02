@@ -1,8 +1,20 @@
 .mediaitem-container {
-    padding: 30px 20px 20px 20px;
+    padding: 5px 20px 5px 20px;
 }
 
 .mediaitem-content {
     margin: auto;
     text-align: center;
 }
+
+ .leaflet-container {  /* all maps */
+        width:  900px;
+        height: 600px;
+    }
+
+ .title-area {
+     text-align: center;
+     margin-bottom: 20px;
+     border-bottom: 2px solid #000000;
+ }
+

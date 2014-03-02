@@ -8,60 +8,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Location'
-        db.create_table(u'mediastory_location', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-        ))
-        db.send_create_signal(u'mediastory', ['Location'])
-
-        # Adding model 'MediaItem'
-        db.create_table(u'mediastory_mediaitem', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('polymorphic_ctype', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'polymorphic_mediastory.mediaitem_set', null=True, to=orm['contenttypes.ContentType'])),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('description', self.gf('django.db.models.fields.TextField')()),
-            ('location', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['mediastory.Location'])),
-        ))
-        db.send_create_signal(u'mediastory', ['MediaItem'])
-
-        # Adding model 'TextMediaItem'
-        db.create_table(u'mediastory_textmediaitem', (
-            (u'mediaitem_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['mediastory.MediaItem'], unique=True, primary_key=True)),
-            ('text', self.gf('django.db.models.fields.TextField')()),
-        ))
-        db.send_create_signal(u'mediastory', ['TextMediaItem'])
-
-        # Adding model 'ImageMediaItem'
-        db.create_table(u'mediastory_imagemediaitem', (
-            (u'mediaitem_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['mediastory.MediaItem'], unique=True, primary_key=True)),
-            ('image', self.gf('filebrowser.fields.FileBrowseField')(max_length=200)),
-        ))
-        db.send_create_signal(u'mediastory', ['ImageMediaItem'])
-
-        # Adding model 'ExternalVideoMediaItem'
-        db.create_table(u'mediastory_externalvideomediaitem', (
-            (u'mediaitem_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['mediastory.MediaItem'], unique=True, primary_key=True)),
-            ('video', self.gf('embed_video.fields.EmbedVideoField')(max_length=200)),
-        ))
-        db.send_create_signal(u'mediastory', ['ExternalVideoMediaItem'])
+        # Adding field 'Location.position'
+        db.add_column(u'mediastory_location', 'position',
+                      self.gf('geoposition.fields.GeopositionField')(default='0,0', max_length=42),
+                      keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting model 'Location'
-        db.delete_table(u'mediastory_location')
-
-        # Deleting model 'MediaItem'
-        db.delete_table(u'mediastory_mediaitem')
-
-        # Deleting model 'TextMediaItem'
-        db.delete_table(u'mediastory_textmediaitem')
-
-        # Deleting model 'ImageMediaItem'
-        db.delete_table(u'mediastory_imagemediaitem')
-
-        # Deleting model 'ExternalVideoMediaItem'
-        db.delete_table(u'mediastory_externalvideomediaitem')
+        # Deleting field 'Location.position'
+        db.delete_column(u'mediastory_location', 'position')
 
 
     models = {
@@ -85,7 +40,8 @@ class Migration(SchemaMigration):
         u'mediastory.location': {
             'Meta': {'object_name': 'Location'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'position': ('geoposition.fields.GeopositionField', [], {'default': "'0,0'", 'max_length': '42'})
         },
         u'mediastory.mediaitem': {
             'Meta': {'object_name': 'MediaItem'},

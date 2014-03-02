@@ -1,4 +1,5 @@
 from embed_video.admin import AdminVideoMixin
+from leaflet.admin import LeafletGeoAdmin
 
 __author__ = 'dwoods'
 
@@ -36,9 +37,6 @@ class MediaItemInline(admin.TabularInline):
 
 class LocationAdmin(admin.ModelAdmin):
     model = Location
-    inlines = [
-        MediaItemInline,
-    ]
 
 
 class MediaItemAdmin(PolymorphicChildModelAdmin):

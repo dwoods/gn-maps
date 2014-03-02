@@ -175,9 +175,9 @@ INSTALLED_APPS = (
 
     # Third party apps
     'suit_redactor',
-    'filer',
     'easy_thumbnails',
     'embed_video',
+    'leaflet',
 
     # Utility
     'pagination',
@@ -187,6 +187,7 @@ INSTALLED_APPS = (
     'friendlytagloader',
     'geoexplorer',
     'django_extensions',
+    'geoposition',
 
     # Theme
     "pinax_theme_bootstrap_account",
@@ -579,7 +580,10 @@ MAP_BASELAYERS = [{
 }]
 
 LEAFLET_CONFIG = {
-    'TILES_URL': 'http://{s}.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png'
+#     'TILES_URL': 'http://{s}.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png'
+#     'SPATIAL_EXTENT': (5.0, 44.0, 7.5, 46),
+    'DEFAULT_CENTER': (51.306, -127.150),
+    'DEFAULT_ZOOM': 8,
 }
 
 
