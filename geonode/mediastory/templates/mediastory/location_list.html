@@ -18,6 +18,14 @@
 
   {% leaflet_map "main" callback="main_map_init" %}
 
+    <div class="legend">
+      <ul>
+      {% for location in locations %}
+        <li id="location-{{ location.id }}"><strong>{{ forloop.counter }}</strong>: <a href="#">{{ location.name }}</a></li>
+      {% endfor %}
+      </ul>
+    </div>
+
 {% endblock %}
 
 {% block extra_script %}
@@ -33,7 +41,9 @@
 
              {% for location in locations %}
 
-                marker = new CustomMarker([{{ location.position.latitude }}, {{ location.position.longitude }}], {});
+                marker = new CustomMarker([{{ location.position.latitude }}, {{ location.position.longitude }}], {
+                    icon:	new NumberedDivIcon({number: '{{ forloop.counter }}'})
+                });
 
                 marker.bindPopup('<h3>{{ location.name }}</h3> {{ location.description|safe|escapejs }}', {
                     showOnMouseOver: true
