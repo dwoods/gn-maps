@@ -68,10 +68,14 @@
                           modal  : true,
                           width  : 1000,
                           height : 750,
-                          title  : "{{ location.name }} : {{ mediaitem.title }}"
+                          title  : "{{ location.name }} : {{ mediaitem.title }}",
                         },
                       {%  endfor %}
-                  ]);
+                  ],
+                  {
+                      allowFullScreen : "true",
+                      maximized: "true"
+                  } );
                 });
 
                 marker.addTo(map);
