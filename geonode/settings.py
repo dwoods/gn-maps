@@ -42,10 +42,10 @@ os.environ['DJANGO_LIVE_TEST_SERVER_ADDRESS'] = 'localhost:8000'
 
 # Defines settings for development
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_ROOT, 'development.db'),
-    },
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': os.path.join(PROJECT_ROOT, 'development.db'),
+    #},
     # vector datastore for uploads
     #'datastore' : {
     #    'ENGINE': 'django.contrib.gis.db.backends.postgis',
@@ -120,9 +120,26 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+FILEBROWSER_STRICT_PIL = True
+# FILEBROWSER_DEBUG = True
+
 FILEBROWSER_DIRECTORY = 'media/'
-FILEBROWSER_VERSIONS_BASEDIR = '_versions'
+FILEBROWSER_VERSIONS_BASEDIR = '_versions/'
 FILEBROWSER_SUIT_TEMPLATE = True
+
+# Define different formats for allowed selections.
+# This has to be a subset of EXTENSIONS.
+FILEBROWSER_SELECT_FORMATS = {
+    'File': ['Folder','Document',],
+    'Image': ['Image'],
+    'Audio': ['Audio'],
+    'Media': ['Video','Audio'],
+    'Document': ['Document'],
+    # for TinyMCE we can also define lower-case items
+    'image': ['Image'],
+    'file': ['Folder','Image','Document',],
+    'media': ['Video','Audio'],
+}
 
 
 # Note that Django automatically includes the "templates" dir in all the

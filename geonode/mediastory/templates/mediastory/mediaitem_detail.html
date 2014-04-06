@@ -12,19 +12,49 @@
     {% with mediaitem|modeltype as modeltype %}
         {% if modeltype == "TextMediaItem" %}
 
-            {{  mediaitem.text|safe }}
+            <div class="story-text">
+                {{  mediaitem.text|safe }}
+            </div>
 
         {% elif modeltype == "ImageMediaItem" %}
 
-            <img src="{% version mediaitem.image 'medium' %}" />
+            <div class="image media-wrapper">
+                <img src="{% version mediaitem.image 'medium' %}" />
+            </div>
 
             <div class="img-caption">
                 <p>{{ mediaitem.image.caption }}</p>
             </div>
 
+            <div class="story-text">
+                {{  mediaitem.text|safe }}
+            </div>
+
+        {% elif modeltype == "AudioMediaItem" %}
+
+            <div class="audio-player media-wrapper">
+                <audio controls="controls">
+                    <source src="{{ mediaitem.audio_file }}" type="{{ mediaitem.audio_file.mimetype.0 }}" />
+                </audio>
+            </div>
+
+            <div class="img-caption">
+                <p>{{ mediaitem.image.caption }}</p>
+            </div>
+
+            <div class="story-text">
+                {{  mediaitem.text|safe }}
+            </div>
+
         {% elif modeltype == "ExternalVideoMediaItem" %}
 
-            {% video mediaitem.video 'large' %}
+            <div class="video-player video-player-external media-wrapper">
+                {% video mediaitem.video 'large' %}
+            </div>
+
+            <div class="story-text">
+                {{  mediaitem.text|safe }}
+            </div>
 
         {%  endif %}
     {%  endwith %}

@@ -6,7 +6,7 @@ __author__ = 'dwoods'
 from django.contrib import admin
 from django.forms import ModelForm, Media
 from polymorphic.admin import PolymorphicParentModelAdmin, PolymorphicChildModelAdmin
-from .models import MediaItem, ImageMediaItem, TextMediaItem, Location, ExternalVideoMediaItem
+from .models import MediaItem, ImageMediaItem, TextMediaItem, AudioMediaItem, Location, ExternalVideoMediaItem
 from suit_redactor.widgets import RedactorWidget
 
 
@@ -75,6 +75,11 @@ class ImageMediaItemAdmin(MediaItemAdmin):
     model = ImageMediaItem
     list_display = ('title', 'thumbnail')
 
+class AudioMediaItemAdmin(MediaItemAdmin):
+
+    model = AudioMediaItem
+    list_display = ('title', 'thumbnail')
+
 class ExternalVideoMediaItemAdmin(AdminVideoMixin, MediaItemAdmin):
 
     model = ExternalVideoMediaItem
@@ -86,6 +91,7 @@ class MediaItemParentAdmin(PolymorphicParentModelAdmin):
     child_models = (
         (TextMediaItem, TextMediaItemAdmin),
         (ImageMediaItem, ImageMediaItemAdmin),
+        (AudioMediaItem, AudioMediaItemAdmin),
         (ExternalVideoMediaItem, ExternalVideoMediaItemAdmin),
     )
     polymorphic_list = True
