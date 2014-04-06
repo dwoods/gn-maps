@@ -124,3 +124,8 @@ var CustomMarker = L.Marker.extend({
 	}
 
 });
+
+//(function($) {
+//
+//
+//}(jQuery));

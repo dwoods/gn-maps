@@ -5,6 +5,7 @@
 .mediaitem-content {
     margin: auto;
     text-align: center;
+    overflow-y: auto;
 }
 
  .leaflet-container {  /* all maps */
@@ -46,5 +47,11 @@
 
 .legend li {
     line-height: 1.5em;
+}
+
+.story-text {
+    margin: 25px 30px 15px;
+    font-size: 1.5em;
+    text-align: left;
 }
 

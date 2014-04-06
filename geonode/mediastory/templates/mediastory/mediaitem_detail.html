@@ -9,6 +9,9 @@
 
     <div class="mediaitem-content">
 
+
+        <h2> {{ mediaitem.title }}</h2>
+
     {% with mediaitem|modeltype as modeltype %}
         {% if modeltype == "TextMediaItem" %}
 
@@ -55,7 +58,6 @@
         {%  endif %}
     {%  endwith %}
 
-        <h2> {{ mediaitem.title }}</h2>
 
 
     </div>

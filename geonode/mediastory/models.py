@@ -46,7 +46,7 @@ class TextMediaItem(MediaItem):
 class ImageMediaItem(MediaItem):
 
     image = FileBrowseField("Image", max_length=200, format="image", blank=False, null=False)
-    text = models.TextField(help_text='Story text', blank=True, null=True)
+    text = models.TextField(help_text='Story text', blank=True, null=True, default=None)
 
     class Meta:
         verbose_name = "Image"
@@ -61,7 +61,7 @@ class ImageMediaItem(MediaItem):
 class AudioMediaItem(MediaItem):
 
     audio_file = FileBrowseField("Audio File", max_length=200, format="Audio", blank=False, null=False)
-    text = models.TextField(help_text='Story text', blank=True, null=True)
+    text = models.TextField(help_text='Story text', blank=True, null=True, default=None)
 
     class Meta:
         verbose_name = "Audio"
@@ -75,7 +75,7 @@ class AudioMediaItem(MediaItem):
 class ExternalVideoMediaItem(MediaItem):
 
     video = EmbedVideoField("Video", max_length=200, blank=False, null=False)
-    text = models.TextField(help_text='Story text', blank=True, null=True)
+    text = models.TextField(help_text='Story text', blank=True, null=True, default=None)
 
     class Meta:
         verbose_name = "External Video"
