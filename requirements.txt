@@ -22,7 +22,7 @@ django-geoexplorer==3.0.5
 django-geoposition
 django-leaflet
 django-jsonfield==0.9.10
--e git+https://github.com/dwoods/django-media-manager.git@edd3ba72c30452ed0e981a136c447f3ea43971a1#egg=django_media_manager-master
+-e git+https://github.com/dwoods/django-media-manager.git#egg=django_media_manager-master
 django-mptt==0.5.5
 django-nose==1.2
 django-notification==1.0
