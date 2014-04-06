@@ -34,7 +34,7 @@ class MediaItemEditor(ModelForm):
         }
 
     class Media:
-        js = ('filebrowser/js/FB_Redactor.js')
+        js = ('filebrowser/js/FB_Redactor.js',)
         css = {
             'all': ('filebrowser/css/suit-filebrowser.css',)
         }
