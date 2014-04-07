@@ -75,14 +75,8 @@
                   {
                       'onOpen'  : function() {
                           var windowH = $('.jquery-lightbox').first().height();
-                          console.log('window height: ' + windowH);
-
                           var titleH = $('.title-area').first().height();
-                          console.log('title height: ' + titleH);
-
                           $('.mediaitem-content').first().height((windowH - titleH - 60));
-                          console.log('content height: ' + $('.mediaitem-content').first().css('height'));
-
                       }
                   }
                   );
