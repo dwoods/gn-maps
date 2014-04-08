@@ -2,40 +2,44 @@
 
 {% load i18n %}{% load leaflet_tags %}
 
-{%  block extra_head %}
+{% block extra_head %}
 
-    {%  include 'mediastory/mediastory_head.html' %}
+    {% include 'mediastory/mediastory_head.html' %}
 
-{%  endblock %}
+{% endblock %}
 
 {% block title %} {% trans "Location Media Test" %} — {{ block.super }} {% endblock %}
 
 {% block body %}
-  <header class="jumbotron subhead" id="overview">
-    <h1>{% trans "Location Media Test" %}</h1>
-    <p class="lead">{% trans "This is a test page to show the media overlay functionality." %}</p>
-  </header>
+    <header class="jumbotron subhead" id="overview">
+        <h1>{% trans "Location Media Test" %}</h1>
 
-  {% leaflet_map "main" callback="main_map_init" %}
+        <p class="lead">{% trans "This is a test page to show the media overlay functionality." %}</p>
+    </header>
+
+    {% leaflet_map "main" callback="main_map_init" %}
+
+    <h2>Legend</h2>
 
     <div class="legend">
-      <ul>
-      {% for location in locations %}
-        <li id="location-{{ location.id }}"><strong>{{ forloop.counter }}</strong>: <a href="#">{{ location.name }}</a></li>
-      {% endfor %}
-      </ul>
+        <ul>
+            {% for location in locations %}
+                <li id="location-{{ location.id }}"><strong>{{ forloop.counter }}</strong>: <a
+                        href="#">{{ location.name }}</a></li>
+            {% endfor %}
+        </ul>
     </div>
 
 {% endblock %}
 
 {% block extra_script %}
 
-    {%  include "mediastory/mediastory_js.html" %}
+    {% include "mediastory/mediastory_js.html" %}
 
     <script type="text/javascript">
 
         // Main map setup function
-        function main_map_init (map, options) {
+        function main_map_init(map, options) {
 
             var reserves_pl = L.tileLayer.wms("{{ GEOSERVER_BASE_URL }}wms", {
                 layers: 'opengeo:gn_reserves',
@@ -48,24 +52,24 @@
             reserves_pl.addTo(map);
 
             var lightboxOpts = {
-                  modal  : false,
-                  width  : '80p',
-                  height : '80p',
-                  title  : "{{ location.name }} Media",
-                  'onOpen'  : function() {
+                modal: false,
+                width: '80p',
+                height: '80p',
+                title: "{{ location.name }} Media",
+                'onOpen': function () {
                     // set inner media container height for scroll bars
                     var windowh = $('.jquery-lightbox').first().height();
                     var titleh = $('.title-area').first().height();
                     $('.mediaitem-content').first().height((windowh - titleh - 60));
-                  }
+                }
             }
 
             var marker;
 
-             {% for location in locations %}
+            {% for location in locations %}
 
                 marker = new CustomMarker([{{ location.position.latitude }}, {{ location.position.longitude }}], {
-                    icon:	new NumberedDivIcon({number: '{{ forloop.counter }}'})
+                    icon: new NumberedDivIcon({number: '{{ forloop.counter }}'})
                 });
 
                 marker.bindPopup('<h3>{{ location.name }}</h3> {{ location.description|safe|escapejs }}', {
@@ -73,16 +77,16 @@
                 });
 
                 // add lightbox handlers to map icon markers
-                marker.on('click', function() {
-                  $.lightbox("{% url 'mediaitem_list' location.id %}", lightboxOpts);
+                marker.on('click', function () {
+                    $.lightbox("{% url 'mediaitem_list' location.id %}", lightboxOpts);
                 });
 
                 marker.addTo(map);
 
                 // add lightbox handlers to legend links
-                $("#location-{{ location.id }} a").click(function(e) {
-                  e.preventDefault();
-                  $.lightbox("{% url 'mediaitem_list' location.id %}", lightboxOpts);
+                $("#location-{{ location.id }} a").click(function (e) {
+                    e.preventDefault();
+                    $.lightbox("{% url 'mediaitem_list' location.id %}", lightboxOpts);
                 });
 
             {% endfor %}
