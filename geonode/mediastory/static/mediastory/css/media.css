@@ -77,3 +77,8 @@
     height: auto;
 }
 
+.attribution {
+    margin: 5px;
+    font-style: italic;
+}
+

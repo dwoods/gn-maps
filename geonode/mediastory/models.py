@@ -22,6 +22,8 @@ class MediaItem(ShowFieldTypeAndContent, PolymorphicModel):
     description = models.TextField("Description")
     location = models.ForeignKey(Location)
 
+    attribution = models.CharField("Attribution", max_length=200, blank=True, null=True)
+
     class Meta:
         verbose_name = "Media Item"
 

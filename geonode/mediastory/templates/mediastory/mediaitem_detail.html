@@ -20,6 +20,11 @@
 
             <div class="image media-wrapper">
                 <img src="{% version mediaitem.image 'xtra-big' %}" />
+                {%  if mediaitem.attribution %}
+                    <div class="caption attribution">
+                        {{ mediaitem.attribution }}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="img-caption">
@@ -36,6 +41,13 @@
                 <audio controls="controls">
                     <source src="{{ mediaitem.audio_file }}" type="{{ mediaitem.audio_file.mimetype.0 }}" />
                 </audio>
+
+                {%  if mediaitem.attribution %}
+                    <div class="caption attribution">
+                        {{ mediaitem.attribution }}
+                    </div>
+                {% endif %}
+
             </div>
 
             <div class="story-text">
@@ -46,6 +58,11 @@
 
             <div class="video-player video-player-external media-wrapper">
                 {% video mediaitem.video 'medium' %}
+                {%  if mediaitem.attribution %}
+                    <div class="caption attribution">
+                        {{ mediaitem.attribution }}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="story-text">
