@@ -61,7 +61,7 @@ class ImageMediaItem(MediaItem):
     @property
     def thumbnail_url(self):
         if self.image and self.image.filetype == "Image":
-            return self.image.url_thumbnail
+            self.image.url_thumbnail
         else:
             return ""
 
