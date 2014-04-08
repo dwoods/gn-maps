@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from embed_video.backends import detect_backend, UnknownBackendException
 from embed_video.fields import EmbedVideoField
@@ -38,8 +39,12 @@ class TextMediaItem(MediaItem):
     class Meta:
         verbose_name = "Text"
 
+    @property
+    def thumnail_url(self):
+        return settings.STATIC_URL + 'mediastory/images/text-icon.png'
+
     def thumbnail(self):
-        return 'TEXT'
+        return '<img src="%s" />' % self.thumnail_url
     thumbnail.allow_tags = True
 
 
@@ -51,11 +56,15 @@ class ImageMediaItem(MediaItem):
     class Meta:
         verbose_name = "Image"
 
-    def thumbnail(self):
+    @property
+    def thumbnail_url(self):
         if self.image and self.image.filetype == "Image":
-            return '<img src="%s" />' % self.image.url_thumbnail
+            return self.image.url_thumbnail
         else:
             return ""
+
+    def thumbnail(self):
+        return '<img src="%s" />' % self.thumbnail_url
     thumbnail.allow_tags = True
 
 class AudioMediaItem(MediaItem):
@@ -66,8 +75,12 @@ class AudioMediaItem(MediaItem):
     class Meta:
         verbose_name = "Audio"
 
+    @property
+    def thumnail_url(self):
+        return settings.STATIC_URL + 'mediastory/images/music-icon.png'
+
     def thumbnail(self):
-        return 'AUDIO'
+        return '<img src="%s" />' % self.thumnail_url
     thumbnail.allow_tags = True
 
 
@@ -80,12 +93,16 @@ class ExternalVideoMediaItem(MediaItem):
     class Meta:
         verbose_name = "External Video"
 
-    def thumbnail(self):
+    @property
+    def thumbnail_url(self):
         try:
             backend = detect_backend(self.video)
-            return '<img src="%s" style="height: 60px;" />' % backend.get_thumbnail_url()
+            return backend.get_thumbnail_url()
         except UnknownBackendException:
-            return '';
+            return ''
+
+    def thumbnail(self):
+        return '<img src="%s" style="height: 60px;" />' % self.thumbnail_url
     thumbnail.allow_tags = True
 
 

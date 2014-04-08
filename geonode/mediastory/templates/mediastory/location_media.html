@@ -1,9 +1,42 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{%  load polytype %}{% load embed_video_tags %}{% load fb_versions %}
 
-</body>
-</html>
+
+<div class="mediaitem-container">
+    <div class="title-area">
+        <h1>{{  location.name  }}</h1>
+    </div>
+
+
+    <div class="mediaitem-content">
+
+   {% for mediaitem in location.mediaitem_set.all %}
+
+        {% with mediaitem|modeltype as modeltype %}
+
+           <div class="media">
+               <a class="pull-left" href="#">
+                   {% if modeltype == "TextMediaItem" %}
+                       <img class="media-object img-polaroid" src="{{ STATIC_URL }}mediastory/images/text-icon.png" />
+                   {% elif modeltype == "ImageMediaItem" %}
+                       <img class="media-object img-polaroid" src="{% version mediaitem.image 'thumbnail' %}" />
+                   {% elif modeltype == "AudioMediaItem" %}
+                       <img class="media-object img-polaroid" src="{{ STATIC_URL }}mediastory/images/music-icon.png" />
+                   {% elif modeltype == "ExternalVideoMediaItem" %}
+                       <img class="media-object img-polaroid" src="{{ mediaitem.thumbnail_url }}" />
+                   {%  endif %}
+               </a>
+
+               <div class="media-body">
+                   <h4 class="media-heading">{{  mediaitem.title }}</h4>
+                    {{  mediaitem.text|safe|truncatewords_html:30 }}
+               </div>
+           </div>
+
+       {%  endwith %}
+
+   {% endfor %}
+
+
+    </div>
+
+</div>

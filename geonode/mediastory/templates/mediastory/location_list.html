@@ -84,19 +84,17 @@
 
                 marker.addTo(map);
 
-                $("#location-{{ location.id }} a").click(function() {
-                  $.lightbox([
-                      {% for mediaitem in location.mediaitem_set.all %}
+                $("#location-{{ location.id }} a").click(function(e) {
+                  e.preventDefault();
+                  $.lightbox("{% url 'mediaitem_list' location.id %}",
                         {
-                          href   : "{% url 'mediaitem_detail' mediaitem.id %}",
-                          modal  : true,
+                          modal  : false,
                           width  : 1000,
                           height : 750,
-                          title  : "{{ location.name }} : {{ mediaitem.title }}"
-                        },
-                      {%  endfor %}
-                  ]);
-{#                  return false;#}
+                          title  : "{{ location.name }} Media"
+                        }
+                  );
+
                 });
             {% endfor %}
         }

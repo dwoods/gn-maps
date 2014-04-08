@@ -11,6 +11,23 @@ class MediaItemList(ListView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super(MediaItemList, self).get_context_data(**kwargs)
+        context['location'] = self.location
+        return context
+
+
+    def get_queryset(self):
+        self.location = get_object_or_404(Location, pk=self.args[0])
+        return MediaItem.objects.filter(location=self.location)
+
+
+class LocationStoriesList(ListView):
+
+    template_name = 'mediastory/location_stories.html'
+    context_object_name = 'stories'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(LocationStoriesList, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['location'] = self.location
         return context
@@ -19,7 +36,6 @@ class MediaItemList(ListView):
     def get_queryset(self):
         self.location = get_object_or_404(Location, name=self.args[0])
         return MediaItem.objects.filter(location=self.location)
-
 
 class LocationList(ListView):
 

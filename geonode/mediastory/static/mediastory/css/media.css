@@ -55,3 +55,14 @@
     text-align: left;
 }
 
+.mediaitem-content .media a {
+    display: block;
+    width: 225px;
+}
+
+.mediaitem-content .media img {
+    height: 140px;
+    width: auto;
+    max-width: 200px;
+}
+
