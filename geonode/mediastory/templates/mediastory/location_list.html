@@ -47,6 +47,19 @@
 
             reserves_pl.addTo(map);
 
+            var lightboxOpts = {
+                  modal  : false,
+                  width  : '80p',
+                  height : '80p',
+                  title  : "{{ location.name }} Media",
+                  'onOpen'  : function() {
+                    // set inner media container height for scroll bars
+                    var windowh = $('.jquery-lightbox').first().height();
+                    var titleh = $('.title-area').first().height();
+                    $('.mediaitem-content').first().height((windowh - titleh - 60));
+                  }
+            }
+
             var marker;
 
              {% for location in locations %}
@@ -59,43 +72,19 @@
                     showOnMouseOver: true
                 });
 
-
+                // add lightbox handlers to map icon markers
                 marker.on('click', function() {
-                  $.lightbox([
-                      {% for mediaitem in location.mediaitem_set.all %}
-                        {
-                          'href'   : "{% url 'mediaitem_detail' mediaitem.id %}",
-                          'modal'  : true,
-                          'width'  : 1000,
-                          'height' : 750,
-                          'title'  : "{{ location.name }} : {{ mediaitem.title }}"
-                        },
-                      {%  endfor %}
-                  ],
-                  {
-                      'onOpen'  : function() {
-                          var windowH = $('.jquery-lightbox').first().height();
-                          var titleH = $('.title-area').first().height();
-                          $('.mediaitem-content').first().height((windowH - titleH - 60));
-                      }
-                  }
-                  );
+                  $.lightbox("{% url 'mediaitem_list' location.id %}", lightboxOpts);
                 });
 
                 marker.addTo(map);
 
+                // add lightbox handlers to legend links
                 $("#location-{{ location.id }} a").click(function(e) {
                   e.preventDefault();
-                  $.lightbox("{% url 'mediaitem_list' location.id %}",
-                        {
-                          modal  : false,
-                          width  : 1000,
-                          height : 750,
-                          title  : "{{ location.name }} Media"
-                        }
-                  );
-
+                  $.lightbox("{% url 'mediaitem_list' location.id %}", lightboxOpts);
                 });
+
             {% endfor %}
         }
 

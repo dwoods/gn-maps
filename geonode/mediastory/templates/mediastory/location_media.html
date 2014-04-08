@@ -14,7 +14,8 @@
         {% with mediaitem|modeltype as modeltype %}
 
            <div class="media">
-               <a class="pull-left" href="#">
+               <a class="pull-left lightbox"
+                  href="{% url 'mediaitem_detail' mediaitem.id %}?lightbox[width]=80p&lightbox[height]=80p&lightbox[modal]=true" rel="group_{{ location.id }}">
                    {% if modeltype == "TextMediaItem" %}
                        <img class="media-object img-polaroid" src="{{ STATIC_URL }}mediastory/images/text-icon.png" />
                    {% elif modeltype == "ImageMediaItem" %}
@@ -40,3 +41,15 @@
     </div>
 
 </div>
+
+ <script type="text/javascript">
+
+     $('.media a').lightbox({
+        'onOpen'  : function() {
+            var windowh = $('.jquery-lightbox').first().height();
+            var titleh = $('.title-area').first().height();
+            $('.mediaitem-content').first().height((windowh - titleh - 60));
+        }
+     });
+
+</script>

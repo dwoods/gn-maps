@@ -3,14 +3,11 @@
 
 <div class="mediaitem-container">
     <div class="title-area">
-        <h1>{{  mediaitem.location.name  }}</h1>
+        <h1>{{  mediaitem.title  }}</h1>
     </div>
 
 
     <div class="mediaitem-content">
-
-
-        <h2> {{ mediaitem.title }}</h2>
 
     {% with mediaitem|modeltype as modeltype %}
         {% if modeltype == "TextMediaItem" %}
@@ -22,7 +19,7 @@
         {% elif modeltype == "ImageMediaItem" %}
 
             <div class="image media-wrapper">
-                <img src="{% version mediaitem.image 'medium' %}" />
+                <img src="{% version mediaitem.image 'xtra-big' %}" />
             </div>
 
             <div class="img-caption">
@@ -48,7 +45,7 @@
         {% elif modeltype == "ExternalVideoMediaItem" %}
 
             <div class="video-player video-player-external media-wrapper">
-                {% video mediaitem.video 'large' %}
+                {% video mediaitem.video 'medium' %}
             </div>
 
             <div class="story-text">
