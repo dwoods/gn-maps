@@ -65,7 +65,7 @@
                         <!--a href="#" rel="tooltip" title="{% trans 'Notifications' %}"><i class="icon-bullhorn"></i></a>
                         <a href="#" rel="tooltip" title="{% trans 'Messages' %}"><i class="icon-envelope"></i></a-->
                         <a href="{% url "data_upload" %}" rel="tooltip" title="{% trans 'Upload' %}"><i class="icon-upload-alt"></i></a>
-                        <a href="{% url "help" %}" rel="tooltip" title="{% trans 'Help' %}"><i class="icon-question-sign"></i></a>
+{#                        <a href="{% url "help" %}" rel="tooltip" title="{% trans 'Help' %}"><i class="icon-question-sign"></i></a>#}
                       </li>
                     {% else %}
                       <li class="dropdown">
@@ -106,7 +106,7 @@
             </div>
           </div>
           <div class="row nav-box">
-            <div class="span10">
+            <div class="span12">
               <nav class="main-nav">
                 <ul>
                   <li id="nav_home">
@@ -144,13 +144,13 @@
                 </ul>
               </nav>
             </div> <!-- ./span10 -->
-            <div class="span2">
+           {% comment %} <div class="span2">
               <ul class="social">
                   <li><a href="http://www.facebook.com/sharer.php?u=http://{{ request.get_host }}{{ request.get_full_path }}" class="fb">facebook</a></li>
                   <li><a href="https://twitter.com/share?url=http://{{ request.get_host }}{{ request.get_full_path }}" class="tw">twitter</a></li>
                   <li><a href="https://plusone.google.com/_/1/confirm?hl=en&url=http://{{ request.get_host }}{{ request.get_full_path }}" class="gp">google+</a></li>
               </ul>
-            </div> <!-- /.span2 -->
+            </div> <!-- /.span2 -->{% endcomment %}
           </div> <!-- /.row nav-box -->
         </div> <!-- /.container -->
         </section>
