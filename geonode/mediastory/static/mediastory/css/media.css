@@ -55,6 +55,8 @@
     text-align: left;
 }
 
+.mediaitem-content .media { }
+
 .mediaitem-content .media a {
     display: block;
     width: 225px;
@@ -64,6 +66,14 @@
     height: 140px;
     width: auto;
     max-width: 200px;
+}
+
+.mediaitem-content .media .media-heading {
+    font-size: 20px;
+}
+.mediaitem-content .media .media-body {
+    padding: 10px 10px 10px 0;
+    text-align: left;
 }
 
 .video-player iframe {
