@@ -8439,3 +8439,6 @@ button.close {
 .mediaitem-content {
   text-align: center;
 }
+.mediaitem-content a {
+  margin: 50px auto;
+}
