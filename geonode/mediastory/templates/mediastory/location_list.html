@@ -11,24 +11,32 @@
 
 {% block title %} {% trans "Location Media Test" %} — {{ block.super }} {% endblock %}
 
-{% block body %}
-    <header class="jumbotron subhead" id="overview">
-        <h1>{% trans "Location Media Test" %}</h1>
+{% block body_outer %}
+    <div class="row">
+        <div class="span12">
+            <header class="jumbotron subhead" id="overview">
+                <h1>{% trans "Location Media Test" %}</h1>
 
-        <p class="lead">{% trans "This is a test page to show the media overlay functionality." %}</p>
-    </header>
+                <p class="lead">{% trans "This is a test page to show the media overlay functionality." %}</p>
+            </header>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span9">
+            {% leaflet_map "main" callback="main_map_init" %}
+        </div>
+        <div class="span3">
+            <h2>Legend</h2>
 
-    {% leaflet_map "main" callback="main_map_init" %}
-
-    <h2>Legend</h2>
-
-    <div class="legend">
-        <ul>
-            {% for location in locations %}
-                <li id="location-{{ location.id }}"><strong>{{ forloop.counter }}</strong>: <a
-                        href="#">{{ location.name }}</a></li>
-            {% endfor %}
-        </ul>
+            <div class="legend">
+                <ul>
+                    {% for location in locations %}
+                        <li id="location-{{ location.id }}"><strong>{{ forloop.counter }}</strong>: <a
+                                href="#">{{ location.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

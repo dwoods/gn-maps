@@ -8349,7 +8349,7 @@ button.close {
 
 .leaflet-container {
   /* all maps */
-  width: 900px;
+  width: auto;
   height: 600px;
 }
 
