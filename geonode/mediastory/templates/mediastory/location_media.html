@@ -107,7 +107,7 @@
                     {
                         url: '{% version item.image 'xtra-big' %}',
                         title: '{{ item.title }}',
-                        caption: '{{ item.description|safe|striptags|truncatewords_html:150 }}'
+                        caption: '{{ item.description|safe|striptags|truncatewords_html:50 }}'
                     }
                     {% if not forloop.last %}, {% endif %}
                 {% endfor %}
@@ -127,7 +127,7 @@
                             {
                                 url: 'http://www.youtube.com/embed/{{ v.code }}?autoplay=1&autohide=1&border=0&egm=0&showinfo=0',
                                 title: '{{ item.title }}',
-                                caption: '{{ item.description|safe|striptags|truncatewords_html:150 }}'
+                                caption: '{{ item.description|safe|striptags|truncatewords_html:50 }}'
                             }
                          {% endvideo %}
                         {% if not forloop.last %}, {% endif %}
@@ -148,7 +148,7 @@
                             url: "{% url 'mediaitem_detail' item.id %}",
                             title: '{{ item.title }}',
                             type: 'iframe',
-                            caption: '{{ item.description|safe|striptags|truncatewords_html:150 }}'
+                            caption: '{{ item.description|safe|striptags|truncatewords_html:50 }}'
                         }
                         {% if not forloop.last %}, {% endif %}
                     {% endfor %}
@@ -168,7 +168,7 @@
                             url: "{% url 'mediaitem_detail' item.id %}",
                             title: '{{ item.title }}',
                             type: 'iframe',
-                            caption: '{{ item.description|safe|striptags|truncatewords_html:150 }}'
+                            caption: '{{ item.description|safe|striptags|truncatewords_html:50 }}'
                         }
                         {% if not forloop.last %}, {% endif %}
                     {% endfor %}
