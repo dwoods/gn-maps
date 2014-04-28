@@ -1,16 +1,67 @@
+{% extends "mediastory/base.html" %}
 {%  load polytype %}{% load embed_video_tags %}{% load fb_versions %}
 
+{% block middle %}
+<div class="mediaitem-container container-fluid">
+    <div class="row">
+        <div class="span12">
+            <div class="title-area ">
+                <h1>{{  location.name  }}</h1>
+                {{  location.description|safe }}
+            </div>
+        </div>
+    </div>
 
-<div class="mediaitem-container">
-    <div class="title-area">
-        <h1>{{  location.name  }}</h1>
-        {{  location.description|safe }}
+        <div class="mediaitem-content  media-content-types">
+            <div class="row">
+                {% if audio_items %}
+                <div class="col-xs-6">
+                    <div class="mediaitem audio">
+                    <a href="#">
+                        <i class="fa fa-music fa-5x"></i>
+                        <h2>Audio</h2>
+                    </a>
+                        </div>
+                </div>
+                {%  endif %}
+                {% if image_items %}
+                <div class="col-xs-6">
+                    <div class="mediaitem images">
+                    <a href="#">
+                        <i class="fa fa-picture-o fa-5x"></i>
+                        <h2>Images</h2>
+                    </a>
+                        </div>
+                </div>
+                {%  endif %}
+                {%  if text_items %}
+                <div class="col-xs-6">
+                    <div class="mediaitem text">
+                    <a href="#">
+                        <i class="fa fa-file-text-o fa-5x"></i>
+                        <h2>Text</h2>
+                    </a>
+                        </div>
+                </div>
+                {%  endif %}
+                {% if extvideo_items %}
+                <div class="col-xs-6">
+                    <div class="mediaitem extvideo">
+                    <a href="#">
+                        <i class="fa fa-video-camera fa-5x"></i>
+                        <h2>Video</h2>
+                    </a>
+                        </div>
+                </div>
+                {%  endif %}
+            </div>
+
+        </div>
     </div>
 
 
-    <div class="mediaitem-content">
 
-   {% for mediaitem in location.mediaitem_set.all %}
+  {% comment %} {% for mediaitem in location.mediaitem_set.all %}
 
         {% with mediaitem|modeltype as modeltype %}
 
@@ -39,18 +90,102 @@
    {% endfor %}
 
 
-    </div>
+    </div>{% endcomment %}
 
-</div>
 
+{%  endblock %}
+
+{%  block extra_script %}
  <script type="text/javascript">
+   $(document).ready(function() {
+        $('.images a').on('click', function() {
+            // stops default click behavior
+            event.preventDefault();
 
-     $('.media a').lightbox({
+            Lightview.show([
+                {% for item in image_items %}
+                    {
+                        url: '{% version item.image 'xtra-big' %}',
+                        title: '{{ item.title }}',
+                        caption: '{{ item.description|safe }}'
+                    }
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+
+            ],
+            { skin: 'mac', controls: 'thumbnails' });
+
+      });
+
+        $('.extvideo a').on('click', function() {
+                // stops default click behavior
+                event.preventDefault();
+
+                Lightview.show([
+                    {% for item in extvideo_items %}
+                         {% video item.video as v %}
+                            {
+                                url: 'http://www.youtube.com/embed/{{ v.code }}?autoplay=1&autohide=1&border=0&egm=0&showinfo=0',
+                                title: '{{ item.title }}',
+                                caption: '{{ item.description|safe }}'
+                            }
+                         {% endvideo %}
+                        {% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+
+                ],
+                        { skin: 'mac', controls: 'thumbnails', viewport: 'scale' });
+
+          });
+
+   $('.text a').on('click', function() {
+                // stops default click behavior
+                event.preventDefault();
+
+                Lightview.show([
+                    {% for item in text_items %}
+                        {
+                            url: "{% url 'mediaitem_detail' item.id %}",
+                            title: '{{ item.title }}',
+                            type: 'iframe',
+                            caption: '{{ item.description|safe }}'
+                        }
+                        {% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+
+                ],
+                        { skin: 'mac', controls: 'thumbnails' });
+
+          });
+
+     $('.audio a').on('click', function() {
+                // stops default click behavior
+                event.preventDefault();
+
+                Lightview.show([
+                    {% for item in audio_items %}
+                        {
+                            url: "{% url 'mediaitem_detail' item.id %}",
+                            title: '{{ item.title }}',
+                            type: 'iframe',
+                            caption: '{{ item.description|safe }}'
+                        }
+                        {% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+
+                ],
+                { skin: 'mac',  });
+
+          });
+       });
+
+{% comment %}     $('.media a').lightbox({
         'onOpen'  : function() {
             var windowh = $('.jquery-lightbox').first().height();
             var titleh = $('.title-area').first().height();
             $('.mediaitem-content').first().height((windowh - titleh - 60));
         }
-     });
+     });{% endcomment %}
 
 </script>
+{% endblock %}

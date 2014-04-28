@@ -1,7 +1,9 @@
 # Create your views here.
+from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
-from .models import Location, MediaItem
+from .models import Location, MediaItem, TextMediaItem, ImageMediaItem, ExternalVideoMediaItem, AudioMediaItem
+
 
 class MediaItemList(ListView):
 
@@ -12,6 +14,14 @@ class MediaItemList(ListView):
         # Call the base implementation first to get a context
         context = super(MediaItemList, self).get_context_data(**kwargs)
         context['location'] = self.location
+
+        queryset = context['media_items']
+
+        context['text_items'] = queryset.filter(polymorphic_ctype=ContentType.objects.get_for_model(TextMediaItem))
+        context['image_items'] = queryset.filter(polymorphic_ctype=ContentType.objects.get_for_model(ImageMediaItem))
+        context['extvideo_items'] = queryset.filter(polymorphic_ctype=ContentType.objects.get_for_model(ExternalVideoMediaItem))
+        context['audio_items'] = queryset.filter(polymorphic_ctype=ContentType.objects.get_for_model(AudioMediaItem))
+
         return context
 
 

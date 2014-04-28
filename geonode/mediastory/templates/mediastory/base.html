@@ -1,0 +1,54 @@
+{% load i18n avatar_tags announcements_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{{ SITE_NAME }}{% endblock %}</title>
+    {% block head %}
+
+      <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}mediastory/css/styles.css">
+      <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}mediastory/lightview/css/lightview/lightview.css"/>
+
+      {% block extra_head %}
+
+
+      {% endblock %}
+    {% endblock %}
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    {% block header %}
+
+    {% endblock header %}
+
+    {% block middle %}
+
+    {% endblock middle %}
+
+    {% block footer %}
+
+    {% endblock footer %}
+
+
+    <script type="text/javascript" src="{{ STATIC_URL }}mediastory/js/jquery/jquery.min.js"></script>
+
+    <script src="{{ STATIC_URL }}mediastory/js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}mediastory/jquery.lightbox/js/lightbox/jquery.lightbox.min.js"></script>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+    <!--[if lt IE 9]>
+          <script type="text/javascript" src="{{ STATIC_URL }}mediastory/lightview/js/excanvas/excanvas.js"></script>
+        <![endif]-->
+    <script type="text/javascript" src="{{ STATIC_URL }}mediastory/lightview/js/spinners/spinners.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}mediastory/lightview/js/lightview/lightview.js"></script>
+
+
+
+    {% block extra_script %}{% endblock extra_script %}
+
+
+  </body>
+</html>

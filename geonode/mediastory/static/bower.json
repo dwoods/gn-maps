@@ -1,0 +1,16 @@
+{
+  "name": "mediastory",
+  "version": "1.0.0",
+  "main": "geonode/mediastory/css/base.css",
+  "componentsDirectory": ".components",
+  "dependencies": {
+    "bootstrap-sass-official": "3.1.1",
+      "font-awesome": "~4.0.3"
+    "jquery": "1.11.0",
+    "jquery-ui": "1.10.4",
+    "requirejs": "2.1.2",
+    "requirejs-text": "2.0.3",
+    "raty": "2.5.2",
+    "json2": "43d7836c8ec9b31a02a31ae0c400bdae04d3650d"
+  }
+}
