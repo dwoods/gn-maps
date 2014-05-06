@@ -9,15 +9,15 @@
 
 {% endblock %}
 
-{% block title %} {% trans "Location Media Test" %} — {{ block.super }} {% endblock %}
+{% block title %} {% trans "Media Map" %} — {{ block.super }} {% endblock %}
 
 {% block body_outer %}
     <div class="row">
         <div class="span12">
             <header class="jumbotron subhead" id="overview">
-                <h1>{% trans "Location Media Test" %}</h1>
+                <h1>{% trans "Media Map" %}</h1>
 
-                <p class="lead">{% trans "This is a test page to show the media overlay functionality." %}</p>
+                <p class="lead"></p>
             </header>
         </div>
     </div>
@@ -81,7 +81,7 @@
                     icon: new NumberedDivIcon({number: '{{ forloop.counter }}'})
                 });
 
-                marker.bindPopup('<h3>{{ location.name }}</h3> {{ location.description|safe|escapejs }}', {
+                marker.bindPopup('<h3>{{ location.name }}</h3> {{ location.description|safe|striptags|escapejs }}', {
                     showOnMouseOver: true
                 });
 
@@ -90,8 +90,8 @@
                    Lightview.show({
                       url: "{% url 'mediaitem_list' location.id %}",
                       type: 'iframe',
-                      title: '{{ location.name }} Media',
-                      caption: '{{ location.description }}',
+                      //title: '{{ location.name }} Media',
+                      //caption: '{{ location.description|safe|striptags|escapejs }}',
                       options: {
                             skin: 'mac',
                             width: '100%',
@@ -112,8 +112,8 @@
                     Lightview.show({
                         url: "{% url 'mediaitem_list' location.id %}",
                         type: 'iframe',
-                        title: '{{ location.name }} Media',
-                        caption: '{{ location.description }}',
+                       // title: '{{ location.name }} Media',
+                       // caption: '{{ location.description|safe|striptags|escapejs }}',
                         options: {
                             skin: 'mac',
                             width: '100%',
