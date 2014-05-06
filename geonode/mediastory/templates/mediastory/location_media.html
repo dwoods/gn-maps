@@ -63,40 +63,6 @@
         </div>
     </div>
 
-
-
-  {% comment %} {% for mediaitem in location.mediaitem_set.all %}
-
-        {% with mediaitem|modeltype as modeltype %}
-
-           <div class="media">
-               <a class="pull-left lightbox"
-                  href="{% url 'mediaitem_detail' mediaitem.id %}?lightbox[width]=80p&lightbox[height]=80p&lightbox[modal]=true" rel="group_{{ location.id }}">
-                   {% if modeltype == "TextMediaItem" %}
-                       <img class="media-object img-polaroid" src="{{ STATIC_URL }}mediastory/images/text-icon.png" />
-                   {% elif modeltype == "ImageMediaItem" %}
-                       <img class="media-object img-polaroid" src="{% version mediaitem.image 'thumbnail' %}" />
-                   {% elif modeltype == "AudioMediaItem" %}
-                       <img class="media-object img-polaroid" src="{{ STATIC_URL }}mediastory/images/music-icon.png" />
-                   {% elif modeltype == "ExternalVideoMediaItem" %}
-                       <img class="media-object img-polaroid" src="{{ mediaitem.thumbnail_url }}" />
-                   {%  endif %}
-               </a>
-
-               <div class="media-body">
-                   <h4 class="media-heading">{{  mediaitem.title }}</h4>
-                    {{  mediaitem.text|safe|truncatewords_html:30 }}
-               </div>
-           </div>
-
-       {%  endwith %}
-
-   {% endfor %}
-
-
-    </div>{% endcomment %}
-
-
 {%  endblock %}
 
 {%  block extra_script %}
@@ -183,14 +149,6 @@
 
           });
        });
-
-{% comment %}     $('.media a').lightbox({
-        'onOpen'  : function() {
-            var windowh = $('.jquery-lightbox').first().height();
-            var titleh = $('.title-area').first().height();
-            $('.mediaitem-content').first().height((windowh - titleh - 60));
-        }
-     });{% endcomment %}
 
 </script>
 {% endblock %}
