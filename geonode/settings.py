@@ -127,6 +127,9 @@ FILEBROWSER_DIRECTORY = 'media/'
 FILEBROWSER_VERSIONS_BASEDIR = '_versions/'
 FILEBROWSER_SUIT_TEMPLATE = True
 
+# Max. Upload Size in Bytes.
+FILEBROWSER_MAX_UPLOAD_SIZE = 52428800
+
 # Define different formats for allowed selections.
 # This has to be a subset of EXTENSIONS.
 FILEBROWSER_SELECT_FORMATS = {
