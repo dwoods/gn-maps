@@ -8357,6 +8357,11 @@ button.close {
   text-align: center;
   margin-bottom: 20px;
   border-bottom: 2px solid #000000;
+  padding: 20px 20px;
+}
+.title-area p {
+  font-size: 1.5em;
+  text-align: left;
 }
 
 .leaflet-div-icon {

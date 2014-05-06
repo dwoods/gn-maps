@@ -9,6 +9,10 @@
   margin-bottom: 20px;
   border-bottom: 2px solid #000000;
 }
+.title-area p {
+  font-size: 2em;
+    text-align: left;
+}
 
 .leaflet-div-icon {
   background: transparent;
