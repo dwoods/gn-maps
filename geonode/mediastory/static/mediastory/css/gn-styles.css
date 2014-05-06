@@ -1,7 +1,8 @@
 .leaflet-container {
   /* all maps */
   width: auto;
-  height: 600px;
+  height: 550px;
+  border: 2px solid #333333;
 }
 
 .title-area {
@@ -11,7 +12,6 @@
 }
 .title-area p {
   font-size: 2em;
-    text-align: left;
 }
 
 .leaflet-div-icon {

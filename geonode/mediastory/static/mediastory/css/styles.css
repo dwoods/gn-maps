@@ -8350,7 +8350,8 @@ button.close {
 .leaflet-container {
   /* all maps */
   width: auto;
-  height: 600px;
+  height: 550px;
+  border: 2px solid #333333;
 }
 
 .title-area {
