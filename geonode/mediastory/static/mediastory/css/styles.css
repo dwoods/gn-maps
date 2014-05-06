@@ -8358,10 +8358,13 @@ button.close {
   text-align: center;
   margin-bottom: 20px;
   border-bottom: 2px solid #000000;
-  padding: 20px 20px;
+  padding: 4px 20px 10px;
+}
+.title-area h1, .title-area h2, .title-area h3, .title-area h4 {
+  font-size: 1.6em;
 }
 .title-area p {
-  font-size: 1.5em;
+  font-size: 1.35em;
   text-align: left;
 }
 
