@@ -145,7 +145,7 @@
                 Lightview.show([
                     {% for item in audio_items %}
                         {
-                            url: "{{ STATIC_URL|slice:":-1" }}{% url 'mediaitem_detail' item.id %}",
+                            url: "{% url 'mediaitem_detail' item.id %}",
                             title: '{{ item.title }}',
                             type: 'iframe',
                             caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}'
