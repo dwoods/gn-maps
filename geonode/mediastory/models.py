@@ -24,8 +24,11 @@ class MediaItem(ShowFieldTypeAndContent, PolymorphicModel):
 
     attribution = models.CharField("Attribution", max_length=200, blank=True, null=True)
 
+    order = models.IntegerField("Sort Order", default=0, blank=True, null=False)
+
     class Meta:
         verbose_name = "Media Item"
+        ordering = ('order',)
 
     def __unicode__(self):
         return self.title

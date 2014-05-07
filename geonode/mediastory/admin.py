@@ -69,27 +69,32 @@ class TextMediaItemAdmin(MediaItemAdmin):
 
     model = TextMediaItem
 
-    list_display = ('title', 'thumbnail')
+    list_display = ('title', 'order', 'thumbnail')
+    # list_editable = ('order',)
 
 class ImageMediaItemAdmin(MediaItemAdmin):
 
     model = ImageMediaItem
-    list_display = ('title', 'thumbnail')
+    list_display = ('title', 'order', 'thumbnail')
+    # list_editable = ('order',)
 
 class AudioMediaItemAdmin(MediaItemAdmin):
 
     model = AudioMediaItem
-    list_display = ('title', 'thumbnail')
+    list_display = ('title', 'order', 'thumbnail')
+    # list_editable = ('order',)
 
 class ExternalVideoMediaItemAdmin(AdminVideoMixin, MediaItemAdmin):
 
     model = ExternalVideoMediaItem
-    list_display = ('title', 'thumbnail')
+    list_display = ('title', 'order', 'thumbnail')
+    # list_editable = ('order',)
 
 class VideoMediaItemAdmin(MediaItemAdmin):
 
     model = VideoMediaItem
-    list_display = ('title', 'thumbnail')
+    list_display = ('title', 'order', 'thumbnail')
+    # list_editable = ('order',)
 
 class MediaItemParentAdmin(PolymorphicParentModelAdmin):
     """ The parent model admin """
@@ -103,7 +108,8 @@ class MediaItemParentAdmin(PolymorphicParentModelAdmin):
     )
     polymorphic_list = True
     readonly_fields = ('thumbnail',)
-    list_display = ('title', 'location', 'thumbnail')
+    list_display = ('title', 'location', 'order', 'thumbnail')
+    list_editable = ('order',)
     list_filter = ('location',)
 
 # Only the parent needs to be registered:
