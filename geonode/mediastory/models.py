@@ -30,6 +30,10 @@ class MediaItem(ShowFieldTypeAndContent, PolymorphicModel):
         verbose_name = "Media Item"
         ordering = ('order',)
 
+    @property
+    def mediatype(self):
+        return "Media"
+
     def __unicode__(self):
         return self.title
 
@@ -43,6 +47,10 @@ class TextMediaItem(MediaItem):
 
     class Meta:
         verbose_name = "Text"
+
+    @property
+    def mediatype(self):
+        return "Text"
 
     @property
     def thumnail_url(self):
@@ -60,6 +68,10 @@ class ImageMediaItem(MediaItem):
 
     class Meta:
         verbose_name = "Image"
+
+    @property
+    def mediatype(self):
+        return "Image"
 
     @property
     def thumbnail_url(self):
@@ -81,6 +93,10 @@ class AudioMediaItem(MediaItem):
         verbose_name = "Audio"
 
     @property
+    def mediatype(self):
+        return "Audio"
+
+    @property
     def thumnail_url(self):
         return settings.STATIC_URL + 'mediastory/images/music-icon.png'
 
@@ -97,6 +113,10 @@ class ExternalVideoMediaItem(MediaItem):
 
     class Meta:
         verbose_name = "External Video"
+
+    @property
+    def mediatype(self):
+        return "External Video"
 
     @property
     def thumbnail_url(self):
@@ -119,6 +139,10 @@ class VideoMediaItem(MediaItem):
 
     class Meta:
         verbose_name = "Video"
+
+    @property
+    def mediatype(self):
+        return "Video"
 
     @property
     def thumbnail_url(self):
