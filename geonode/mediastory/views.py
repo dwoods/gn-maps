@@ -1,8 +1,10 @@
 # Create your views here.
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
-from .models import Location, MediaItem, TextMediaItem, ImageMediaItem, ExternalVideoMediaItem, AudioMediaItem
+from .models import Location, MediaItem, TextMediaItem, ImageMediaItem, ExternalVideoMediaItem, AudioMediaItem, \
+    VideoMediaItem
 
 
 class MediaItemList(ListView):
@@ -19,8 +21,9 @@ class MediaItemList(ListView):
 
         context['text_items'] = queryset.filter(polymorphic_ctype=ContentType.objects.get_for_model(TextMediaItem))
         context['image_items'] = queryset.filter(polymorphic_ctype=ContentType.objects.get_for_model(ImageMediaItem))
-        context['extvideo_items'] = queryset.filter(polymorphic_ctype=ContentType.objects.get_for_model(ExternalVideoMediaItem))
         context['audio_items'] = queryset.filter(polymorphic_ctype=ContentType.objects.get_for_model(AudioMediaItem))
+        context['video_items'] = queryset.filter(Q(polymorphic_ctype=ContentType.objects.get_for_model(ExternalVideoMediaItem)) |
+                                                 Q(polymorphic_ctype=ContentType.objects.get_for_model(VideoMediaItem)))
 
         return context
 
@@ -61,3 +64,9 @@ class MediaItemDetail(DetailView):
     template_name = 'mediastory/mediaitem_detail.html'
     context_object_name = 'mediaitem'
     queryset = MediaItem.objects.all()
+
+
+class VideoItemDetail(DetailView):
+    template_name = 'mediastory/videoplayer.html'
+    context_object_name = 'videoitem'
+    queryset = VideoMediaItem.objects.all()

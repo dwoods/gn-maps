@@ -6,7 +6,8 @@ __author__ = 'dwoods'
 from django.contrib import admin
 from django.forms import ModelForm, Media
 from polymorphic.admin import PolymorphicParentModelAdmin, PolymorphicChildModelAdmin
-from .models import MediaItem, ImageMediaItem, TextMediaItem, AudioMediaItem, Location, ExternalVideoMediaItem
+from .models import MediaItem, ImageMediaItem, TextMediaItem, AudioMediaItem, Location, ExternalVideoMediaItem, \
+    VideoMediaItem
 from suit_redactor.widgets import RedactorWidget
 
 
@@ -85,6 +86,11 @@ class ExternalVideoMediaItemAdmin(AdminVideoMixin, MediaItemAdmin):
     model = ExternalVideoMediaItem
     list_display = ('title', 'thumbnail')
 
+class VideoMediaItemAdmin(MediaItemAdmin):
+
+    model = VideoMediaItem
+    list_display = ('title', 'thumbnail')
+
 class MediaItemParentAdmin(PolymorphicParentModelAdmin):
     """ The parent model admin """
     base_model = MediaItem
@@ -93,6 +99,7 @@ class MediaItemParentAdmin(PolymorphicParentModelAdmin):
         (ImageMediaItem, ImageMediaItemAdmin),
         (AudioMediaItem, AudioMediaItemAdmin),
         (ExternalVideoMediaItem, ExternalVideoMediaItemAdmin),
+        (VideoMediaItem, VideoMediaItemAdmin),
     )
     polymorphic_list = True
     readonly_fields = ('thumbnail',)

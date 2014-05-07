@@ -107,6 +107,24 @@ class ExternalVideoMediaItem(MediaItem):
         return '<img src="%s" style="height: 60px;" />' % self.thumbnail_url
     thumbnail.allow_tags = True
 
+class VideoMediaItem(MediaItem):
+
+    # video_file = FileBrowseField("Video File", max_length=200, format="Video", blank=False, null=False)
+    video_file_webm = FileBrowseField("Video File (webm)", max_length=200, format="Video", blank=False, null=True)
+    video_file_mp4 = FileBrowseField("Video File (mp4)", max_length=200, format="Video", blank=False, null=True)
+    text = models.TextField(help_text='Story text', blank=True, null=True, default=None)
+
+    class Meta:
+        verbose_name = "Video"
+
+    @property
+    def thumbnail_url(self):
+        return ''
+
+    def thumbnail(self):
+        return ''
+    thumbnail.allow_tags = True
+
 
 
 
