@@ -128,7 +128,19 @@ FILEBROWSER_VERSIONS_BASEDIR = '_versions/'
 FILEBROWSER_SUIT_TEMPLATE = True
 
 # Max. Upload Size in Bytes.
-FILEBROWSER_MAX_UPLOAD_SIZE = 52428800
+FILEBROWSER_MAX_UPLOAD_SIZE = (52428800*2)
+
+# Allowed Extensions for File Upload. Lower case is important.
+# Please be aware that there are Icons for the default extension settings.
+# Therefore, if you add a category (e.g. "Misc"), you won't get an icon.
+FILEBROWSER_EXTENSIONS = {
+    'Folder': [''],
+    'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
+    'Video': ['.mov','.wmv','.mpeg','.mpg','.avi','.rm', '.mp4', '.flv', '.webm'],
+    'Document': ['.pdf','.doc','.rtf','.txt','.xls','.csv'],
+    'Audio': ['.mp3','.mp4','.wav','.aiff','.midi','.m4p'],
+    'Code': ['.html','.py','.js','.css']
+}
 
 # Define different formats for allowed selections.
 # This has to be a subset of EXTENSIONS.
@@ -136,6 +148,7 @@ FILEBROWSER_SELECT_FORMATS = {
     'File': ['Folder','Document',],
     'Image': ['Image'],
     'Audio': ['Audio'],
+    'Video': ['Video'],
     'Media': ['Video','Audio'],
     'Document': ['Document'],
     # for TinyMCE we can also define lower-case items
