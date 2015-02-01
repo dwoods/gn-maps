@@ -47,6 +47,11 @@
 .location-list .content-wrap {
   width: 100%;
 }
-.location-list .content-wrap .container, .location-list .content-wrap .row {
+.location-list .content-wrap .container {
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.location-list .content-wrap .row {
   width: 100%;
 }

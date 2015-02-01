@@ -46,7 +46,12 @@
 
 .location-list .content-wrap {
   width: 100%;
-  .container, .row {
+  .container {
+   width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .row {
     width: 100%;
   }
 }
