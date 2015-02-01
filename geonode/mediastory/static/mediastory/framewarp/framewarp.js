@@ -30,8 +30,8 @@
 			
 			e.preventDefault();
 
-			var elem = $(this),
-				offset = elem.offset();
+//			var elem = $(this),
+//				offset = elem.offset();
 
 			// The center of the button
 			var buttonCenter = {
