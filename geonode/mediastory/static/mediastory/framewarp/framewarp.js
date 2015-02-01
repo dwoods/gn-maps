@@ -33,11 +33,11 @@
 //			var elem = $(this),
 //				offset = elem.offset();
 
-			// The center of the button
-			var buttonCenter = {
-				x: offset.left - win.scrollLeft() + elem.outerWidth()/2,
-				y: offset.top - win.scrollTop() + elem.outerHeight()/2
-			};
+//			// The center of the button
+//			var buttonCenter = {
+//				x: offset.left - win.scrollLeft() + elem.outerWidth()/2,
+//				y: offset.top - win.scrollTop() + elem.outerHeight()/2
+//			};
 		
 			// The center of the window
 			var windowCenter = {
