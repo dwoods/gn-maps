@@ -12,6 +12,10 @@
         </div>
     </div>
 
+ <div class="navigation">
+        <a href="{% url 'location_list' %}" title="Go back to the map">&lt; Back to map</a>
+    </div>
+
         <div class="mediaitem-content media-content-types">
             <div class="row">
                 {% if audio_items %}
@@ -83,7 +87,7 @@
                 {% endfor %}
 
             ],
-            { skin: 'mac', width: '100%', height: '100%' });
+            { skin: 'mac', width: '100%', height: '100%', controls: 'thumbnails' });
 
       });
 

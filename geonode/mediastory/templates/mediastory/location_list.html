@@ -87,7 +87,11 @@
 
                 // add lightbox handlers to map icon markers
                 marker.on('click', function () {
-                   Lightview.show({
+
+		   window.location = "{% url 'mediaitem_list' location.id %}";
+		   //return false;
+                   
+                   /*Lightview.show({
                       url: "{% url 'mediaitem_list' location.id %}",
                       type: 'iframe',
                       //title: '{{ location.name }} Media',
@@ -101,6 +105,7 @@
                             }
                         }
                     });
+                  */
 {#                    $.lightbox("{% url 'mediaitem_list' location.id %}", lightboxOpts);#}
                 });
 
