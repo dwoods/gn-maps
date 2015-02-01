@@ -72,8 +72,8 @@
 			popup = $('<div>').addClass('popup').css({
 				width	: 0,
 				height	: 0,
-				top		: buttonCenter.y,
-				left	: buttonCenter.x - 35
+				top		: 0,
+				left	: 35 - 35
 			});
 
 			// Append it to the page, and trigger a CSS3 animation
