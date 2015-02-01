@@ -8451,10 +8451,3 @@ button.close {
 .mediaitem-content a {
   margin: 50px auto;
 }
-
-.location-list .content-wrap {
-  width: 100%;
-}
-.location-list .content-wrap .container, .location-list .content-wrap .row {
-  width: 100%;
-}

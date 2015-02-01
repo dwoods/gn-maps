@@ -43,3 +43,10 @@
 .legend li {
   line-height: 1.5em;
 }
+
+.location-list .content-wrap {
+  width: 100%;
+}
+.location-list .content-wrap .container, .location-list .content-wrap .row {
+  width: 100%;
+}
