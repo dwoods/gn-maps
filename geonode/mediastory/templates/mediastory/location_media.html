@@ -13,7 +13,7 @@
     </div>
 
  <div class="navigation">
-        <a href="{% url 'location_list' %}" title="Go back to the map">&lt; Back to map</a>
+	<a id="closebtn" href="#" title="Go back to the map">&lt; Back to map</a>
     </div>
 
         <div class="mediaitem-content media-content-types">
@@ -72,6 +72,11 @@
 {%  block extra_script %}
  <script type="text/javascript">
    $(document).ready(function() {
+
+        $("#closebtn").click(function() {
+		frameWarp.hide();
+	});
+
         $('.images a').on('click', function(event) {
             // stops default click behavior
             event.preventDefault();

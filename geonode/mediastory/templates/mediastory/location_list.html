@@ -9,6 +9,8 @@
 
 {% endblock %}
 
+{% block body_class %}location-list{% endblock %}
+
 {% block title %} {% trans "Media Map" %} — {{ block.super }} {% endblock %}
 
 {% block body_outer %}
@@ -21,7 +23,7 @@
             </header>
         </div>
     </div>
-    <div class="row">
+    <div class="row-fluid">
         <div class="span9">
             {% leaflet_map "main" callback="main_map_init" %}
         </div>
@@ -87,55 +89,19 @@
 
 		$(marker).frameWarp({
                     url: "{% url 'mediaitem_list' location.id %}",
-                    width: '98%',
-                    height: '98%'
+                    width: '100%',
+                    height: '100%'
                 });
-
-                // add lightbox handlers to map icon markers
-//                marker.on('click', function () {
-
-//		   window.location = "{% url 'mediaitem_list' location.id %}";
-		   //return false;
-                   
-                   /*Lightview.show({
-                      url: "{% url 'mediaitem_list' location.id %}",
-                      type: 'iframe',
-                      //title: '{{ location.name }} Media',
-                      //caption: '{{ location.description|safe|striptags|escapejs }}',
-                      options: {
-                            skin: 'mac',
-                            width: '100%',
-                            height: '100%',
-                            params: {
-                                controller: false
-                            }
-                        }
-                    });
-                  */
-{#                    $.lightbox("{% url 'mediaitem_list' location.id %}", lightboxOpts);#}
- //               });
 
                 marker.addTo(map);
 
-                // add lightbox handlers to legend links
-                $("#location-{{ location.id }} a").click(function (e) {
-                    e.preventDefault();
-                    Lightview.show({
-                        url: "{% url 'mediaitem_list' location.id %}",
-                        type: 'iframe',
-                       // title: '{{ location.name }} Media',
-                       // caption: '{{ location.description|safe|striptags|escapejs }}',
-                        options: {
-                            skin: 'mac',
-                            width: '100%',
-                            height: '100%',
-                            params: {
-                                controller: false
-                            }
-                        }
-                    });
-{#                    $.lightbox("{% url 'mediaitem_list' location.id %}", lightboxOpts);#}
-                });
+		  // add lightbox handlers to legend links
+	    $('#location-{{ location.id }} a').frameWarp({
+		url: "{% url 'mediaitem_list' location.id %}",
+		width: '100%',
+		height: '100%'
+	    });
+
 
             {% endfor %}
         }
