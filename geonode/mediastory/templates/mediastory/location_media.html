@@ -2,20 +2,20 @@
 {%  load polytype %}{% load embed_video_tags %}{% load fb_versions %}
 
 {% block middle %}
+   <div class="jumbotron">
+	<div class="container"> 
+	    <div class="row">
+		<div class="span12">
+			<h1>{{  location.name  }}</h1>
+			<p>{{  location.description|safe }}</p>
+			<p><a id="closebtn" class="btn btn-primary" href="#" title="Go back to the map" style="margin: 15px 15px 0 15px;">&lt; Back to map</a></p>
+		</div>
+	    </div>
+	</div>
+   </div>
+
+
 <div class="mediaitem-container container-fluid">
-    <div class="row">
-        <div class="span12">
-            <div class="title-area ">
-                <h1>{{  location.name  }}</h1>
-                {{  location.description|safe }}
-            </div>
-        </div>
-    </div>
-
- <div class="navigation">
-	<a id="closebtn" href="#" title="Go back to the map">&lt; Back to map</a>
-    </div>
-
         <div class="mediaitem-content media-content-types">
             <div class="row">
                 {% if audio_items %}
