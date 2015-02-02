@@ -54,7 +54,6 @@
   padding-left: 15px;
   padding-right: 15px;
 }
-
-.frameCacheDiv .iframe {
+.location-list .content-wrap .frameCacheDiv iframe {
   border: 5px solid #428bca;
 }

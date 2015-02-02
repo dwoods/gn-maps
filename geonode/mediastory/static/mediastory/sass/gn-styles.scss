@@ -54,8 +54,9 @@
     padding-left: 15px;
     padding-right: 15px;
   }
+
+  .frameCacheDiv iframe {
+    border: 5px solid #428bca;
+  }
 }
 
-.frameCacheDiv .iframe {
-  border: 5px solid #428bca;
-}
