@@ -54,3 +54,7 @@
   padding-left: 15px;
   padding-right: 15px;
 }
+
+.frameCacheDiv {
+  border: 5px solid #428bca;
+}
