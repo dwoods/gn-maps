@@ -55,6 +55,6 @@
   padding-right: 15px;
 }
 
-.frameCacheDiv {
+.frameCacheDiv .iframe {
   border: 5px solid #428bca;
 }
