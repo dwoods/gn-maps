@@ -8451,3 +8451,11 @@ button.close {
 .mediaitem-content a {
   margin: 50px auto;
 }
+
+.lv_title {
+  font-size: 20px;
+}
+
+.lv_caption {
+  font-size: 14px;
+}
