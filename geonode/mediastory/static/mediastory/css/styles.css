@@ -8383,21 +8383,6 @@ button.close {
   text-align: center;
 }
 
-.legend {
-  font-size: 1.3em;
-  margin: 15px 0;
-  padding: 10px;
-  border: 2px solid #000000;
-}
-
-.legend ul {
-  list-style: none;
-}
-
-.legend li {
-  line-height: 1.5em;
-}
-
 .story-text {
   margin: 25px 30px 15px;
   font-size: 1.5em;

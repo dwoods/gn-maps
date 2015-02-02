@@ -28,13 +28,13 @@
             {% leaflet_map "main" callback="main_map_init" %}
         </div>
         <div class="span3">
-            <h2>Legend</h2>
+            <h2>Places</h2>
 
             <div class="legend">
-                <ul>
+                <ul class="nav nav-tabs nav-stacked">
                     {% for location in locations %}
-                        <li id="location-{{ location.id }}"><strong>{{ forloop.counter }}</strong>: <a
-                                href="#">{{ location.name }}</a></li>
+                        <li id="location-{{ location.id }}" class="list-group-item">
+                             <a href="#"><span class="badge">{{ forloop.counter }}</span> {{ location.name }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
