@@ -12,70 +12,15 @@
 
                     <p><a id="closebtn" class="btn btn-primary" href="#" title="Go back to the map"
                           style="margin: 15px 15px 0 15px;">&lt; Back to map</a></p>
+
+                    <p><a id="viewbtn" class="btn btn-primary" href="#" title="View media"
+                          style="margin: 15px 15px 0 15px;">View Media</a></p>
+
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="mediaitem-container container-fluid">
-        <div class="mediaitem-content media-content-types">
-            <div class="row">
-                {% if audio_items %}
-                    <div class="col-xs-3">
-                        <div class="mediaitem audio">
-                            <a href="#">
-                                <i class="fa fa-music fa-5x"></i>
-
-                                <h2>Audio</h2>
-
-                                <p>({{ audio_items|length }} audio clips)</p>
-                            </a>
-                        </div>
-                    </div>
-                {% endif %}
-                {% if image_items %}
-                    <div class="col-xs-3">
-                        <div class="mediaitem images">
-                            <a href="#">
-                                <i class="fa fa-picture-o fa-5x"></i>
-
-                                <h2>Images</h2>
-
-                                <p>({{ image_items|length }} images)</p>
-                            </a>
-                        </div>
-                    </div>
-                {% endif %}
-                {% if text_items %}
-                    <div class="col-xs-3">
-                        <div class="mediaitem text">
-                            <a href="#">
-                                <i class="fa fa-file-text-o fa-5x"></i>
-
-                                <h2>Text</h2>
-
-                                <p>({{ text_items|length }} documents)</p>
-                            </a>
-                        </div>
-                    </div>
-                {% endif %}
-                {% if video_items %}
-                    <div class="col-xs-3">
-                        <div class="mediaitem extvideo">
-                            <a href="#">
-                                <i class="fa fa-video-camera fa-5x"></i>
-
-                                <h2>Video</h2>
-
-                                <p>({{ video_items|length }} videos)</p>
-                            </a>
-                        </div>
-                    </div>
-                {% endif %}
-            </div>
-
-        </div>
-    </div>
 
 {% endblock %}
 
@@ -87,95 +32,63 @@
                 frameWarp.hide();
             });
 
-            $('.images a').on('click', function (event) {
-                // stops default click behavior
-                event.preventDefault();
+            $("#viewbtn").click(function (event) {
+               event.preventDefault();
 
-                Lightview.show([
-                            {% for item in image_items %}
+               $.iLightBox([
+                    {% for item in media_items %}
+                        {% with item|modeltype as modeltype %}
+                            {% if modeltype == "ExternalVideoMediaItem" %}
+                                {% video item.video as v %}
+                                    {
+                                        URL: 'http://www.youtube.com/embed/{{ v.code }}?autoplay=1&autohide=1&border=0&egm=0&showinfo=0',
+                                        title: '{{ item.title }}',
+                                        caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
+                                        thumbnail: 'http://img.youtube.com/vi/{{ v.code }}/1.jpg',
+                                        type: 'iframe'
+                                    }
+                                {% endvideo %}
+                            {% elif modeltype == "VideoMediaItem" %}
                                 {
-                                    url: '{% version item.image 'xtra-big' %}',
+                                    URL: "{% url 'videoitem_embed' item.id %}",
+                                    title: '{{ item.title }}',
+                                    type: 'video',
+                                    caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
+                                }
+                            {% elif modeltype == 'ImageMediaItem' %}
+                                {
+                                    URL: '{% version item.image 'xtra-big' %}',
+                                    type: 'image',
                                     title: '{{ item.title }}',
                                     caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}'
                                 }
-                                {% if not forloop.last %}, {% endif %}
-                            {% endfor %}
-
-                        ],
-                        { skin: 'mac', width: '100%', height: '100%', controls: 'thumbnails' });
-
-            });
-
-            $('.extvideo a').on('click', function (event) {
-                // stops default click behavior
-                event.preventDefault();
-
-                Lightview.show([
-                            {% for item in video_items %}
-                                {% with item|modeltype as modeltype %}
-                                    {% if modeltype == "ExternalVideoMediaItem" %}
-                                        {% video item.video as v %}
-                                            {
-                                                url: 'http://www.youtube.com/embed/{{ v.code }}?autoplay=1&autohide=1&border=0&egm=0&showinfo=0',
-                                                title: '{{ item.title }}',
-                                                caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
-                                                thumbnail: 'http://img.youtube.com/vi/{{ v.code }}/1.jpg'
-                                            }
-                                        {% endvideo %}
-                                    {% elif modeltype == "VideoMediaItem" %}
-                                        {
-                                            url: "{% url 'videoitem_embed' item.id %}",
-                                            title: '{{ item.title }}',
-                                            caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
-                                        }
-                                    {%  endif %}
-                                {%  endwith %}
-                                {% if not forloop.last %}, {% endif %}
-                            {% endfor %}
-                        ],
-                        { skin: 'mac', viewport: 'scale' });
-
-            });
-
-            $('.text a').on('click', function (event) {
-                // stops default click behavior
-                event.preventDefault();
-
-                Lightview.show([
-                            {% for item in text_items %}
+                            {% elif modeltype == 'TextMediaItem' %}
                                 {
-                                    url: "{% url 'mediaitem_detail' item.id %}",
+                                    URL: "{% url 'mediaitem_detail' item.id %}",
                                     title: '{{ item.title }}',
                                     type: 'iframe',
                                     caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}'
                                 }
-                                {% if not forloop.last %}, {% endif %}
-                            {% endfor %}
-
-                        ],
-                        { skin: 'mac', controls: 'thumbnails' });
-
-            });
-
-            $('.audio a').on('click', function (event) {
-                // stops default click behavior
-                event.preventDefault();
-
-                Lightview.show([
-                            {% for item in audio_items %}
+                            {% elif modeltype == 'AudioMediaItem' %}
                                 {
-                                    url: "{% url 'mediaitem_detail' item.id %}",
+                                    URL: "{% url 'mediaitem_detail' item.id %}",
                                     title: '{{ item.title }}',
                                     type: 'iframe',
-                                    caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}'
+                                    caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
+                                    options: {
+                                        height: 300,
+                                        width: 500
+                                    }
                                 }
-                                {% if not forloop.last %}, {% endif %}
-                            {% endfor %}
+                            {%  endif %}
+                        {%  endwith %}
+                        {% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                ]);
 
-                        ],
-                        { skin: 'mac' });
 
             });
+
         });
 
     </script>
