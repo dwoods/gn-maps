@@ -404,7 +404,7 @@ $(document).one("ajaxStop", function () {
 
   /* instantiate the typeahead UI */
   $("#searchbox").typeahead({
-    minLength: 3,
+    minLength: 2,
     highlight: true,
     hint: false
   }, {
@@ -413,7 +413,7 @@ $(document).one("ajaxStop", function () {
     source: locationsBH.ttAdapter(),
     templates: {
       header: "<h4 class='typeahead-header'><img src='{{ STATIC_URL }}mediastory/images/location.png' width='24' height='28'>&nbsp;Locations</h4>",
-      suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{population}}</small>"].join(""))
+      {% verbatim %}suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{population}}</small>"].join("")){% endverbatim %}
     }
   }, {
     name: "GeoNames",
