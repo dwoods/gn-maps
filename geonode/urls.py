@@ -21,6 +21,7 @@ from django.conf.urls import include, patterns, url
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
+import settingsjs.urls
 from geonode.sitemap import LayerSitemap, MapSitemap
 from django.views.generic import TemplateView
 
@@ -107,6 +108,7 @@ if settings.DOCUMENTS_APP:
     )
 
 urlpatterns += geonode.proxy.urls.urlpatterns
+urlpatterns += settingsjs.urls.urlpatterns
 
 # Serve static files
 urlpatterns += staticfiles_urlpatterns()

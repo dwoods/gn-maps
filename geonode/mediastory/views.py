@@ -2,7 +2,8 @@
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
+from djgeojson.views import GeoJSONLayerView
 from .models import Location, MediaItem, TextMediaItem, ImageMediaItem, ExternalVideoMediaItem, AudioMediaItem, \
     VideoMediaItem
 
@@ -70,3 +71,18 @@ class VideoItemDetail(DetailView):
     template_name = 'mediastory/videoplayer.html'
     context_object_name = 'videoitem'
     queryset = VideoMediaItem.objects.all()
+
+
+class MapView(TemplateView):
+    template_name = "mediastory/main.html"
+
+
+class LocationsLayer(GeoJSONLayerView):
+    # Options
+    properties = {
+        'name': 'name',
+        'description': 'description',
+        'population': 'population'
+    }
+
+

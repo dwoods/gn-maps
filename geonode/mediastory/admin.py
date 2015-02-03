@@ -9,6 +9,7 @@ from polymorphic.admin import PolymorphicParentModelAdmin, PolymorphicChildModel
 from .models import MediaItem, ImageMediaItem, TextMediaItem, AudioMediaItem, Location, ExternalVideoMediaItem, \
     VideoMediaItem
 from suit_redactor.widgets import RedactorWidget
+from leaflet.admin import LeafletGeoAdmin
 
 
 
@@ -49,7 +50,7 @@ class MediaItemInline(admin.TabularInline):
 
 
 
-class LocationAdmin(admin.ModelAdmin):
+class LocationAdmin(LeafletGeoAdmin):
     model = Location
     form = LocationEditor
 

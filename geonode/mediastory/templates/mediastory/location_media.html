@@ -47,16 +47,30 @@
                                         type: 'iframe',
                                         options: {
                                             thumbnail: 'http://img.youtube.com/vi/{{ v.code }}/1.jpg',
-                                            icon: 'video'
+                                            icon: 'video',
+                                            width: 800
                                         }
                                     }
                                 {% endvideo %}
                             {% elif modeltype == "VideoMediaItem" %}
                                 {
-                                    URL: "{% url 'videoitem_embed' item.id %}",
+{#                                    URL: "{% url 'videoitem_embed' item.id %}",#}
+                                    URL: '{{ item.video_file_mp4 }}',
                                     title: '{{ item.title }}',
                                     type: 'video',
                                     caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
+                                    options: {
+                                        width: 800,
+                                        videoType: 'video/mp4',
+                                        html5video: {
+                                            h264: '{{ item.video_file_mp4 }}',
+                                            webm: '{{ item.video_file_webm }}',
+{#                                            poster: '/path/video-poster.jpg',#}
+                                            controls: false,
+                                            autoplay: true,
+                                            preload: 'auto'
+                                        }
+                                    }
                                 }
                             {% elif modeltype == 'ImageMediaItem' %}
                                 {
@@ -69,8 +83,11 @@
                                 {
                                     URL: "{% url 'mediaitem_detail' item.id %}",
                                     title: '{{ item.title }}',
-                                    type: 'ajax',
-                                    caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}'
+                                    type: 'iframe',
+                                    caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
+                                    options: {
+                                        width: 800
+                                    }
                                 }
                             {% elif modeltype == 'AudioMediaItem' %}
                                 {
@@ -79,17 +96,25 @@
                                     type: 'iframe',
                                     caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
                                     options: {
-                                        height: 'auto',
-                                        width: '80%',
-                                        height: '80%'
+                                        width: 800
                                     }
                                 }
                             {%  endif %}
                         {%  endwith %}
                         {% if not forloop.last %}, {% endif %}
                     {% endfor %}
-                ],
-               { skin: 'light', fullStretchTypes: 'image, flash, video, iframe'}
+               ],
+               {
+                   skin: 'mac',
+                   fullStretchTypes: 'image, flash, video',
+                   mousewheel: false,
+                   styles: {
+                       pageOffsetX: 30,
+                       pageOffsetY: 30
+                   }
+
+               }
+
                );
 
 

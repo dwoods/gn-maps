@@ -6,13 +6,20 @@ from polymorphic import PolymorphicModel, ShowFieldType, ShowFieldTypeAndContent
 from filebrowser.settings import ADMIN_THUMBNAIL
 from geoposition.fields import GeopositionField
 from filebrowser.fields import FileBrowseField
+from djgeojson.fields import PointField
+from django.core.urlresolvers import reverse
 
 
 class Location(models.Model):
     name = models.CharField("Name", max_length=100, blank=False, null=False)
     description = models.TextField("Description", blank=True, null=True)
     population = models.IntegerField("Population", blank=True, null=True)
-    position = GeopositionField()
+    #position = GeopositionField()
+    geom = PointField()
+
+    @property
+    def media_url(self):
+        return reverse('mediaitem_list', args=[self.id])
 
     def __unicode__(self):
         return self.name

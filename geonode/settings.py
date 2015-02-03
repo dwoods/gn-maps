@@ -118,6 +118,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 FILEBROWSER_STRICT_PIL = True
@@ -224,6 +225,9 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'embed_video',
     'leaflet',
+    'settingsjs',
+    'compressor',
+    'djgeojson',
 
     # Utility
     'pagination',
@@ -641,6 +645,11 @@ AUTH_EXEMPT_URLS = ()
 
 if LOCKDOWN_GEONODE:
     MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + ('geonode.security.middleware.LoginRequiredMiddleware',)
+
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.template.TemplateFilter',
+]
+COMPRESS_ENABLED = True
 
 # Load more settings from a file called local_settings.py if it exists
 try:
