@@ -44,8 +44,11 @@
                                         URL: 'http://www.youtube.com/embed/{{ v.code }}?autoplay=1&autohide=1&border=0&egm=0&showinfo=0',
                                         title: '{{ item.title }}',
                                         caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
-                                        thumbnail: 'http://img.youtube.com/vi/{{ v.code }}/1.jpg',
-                                        type: 'iframe'
+                                        type: 'iframe',
+                                        options: {
+                                            thumbnail: 'http://img.youtube.com/vi/{{ v.code }}/1.jpg',
+                                            icon: 'video'
+                                        }
                                     }
                                 {% endvideo %}
                             {% elif modeltype == "VideoMediaItem" %}
@@ -66,7 +69,7 @@
                                 {
                                     URL: "{% url 'mediaitem_detail' item.id %}",
                                     title: '{{ item.title }}',
-                                    type: 'iframe',
+                                    type: 'ajax',
                                     caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}'
                                 }
                             {% elif modeltype == 'AudioMediaItem' %}
@@ -76,15 +79,18 @@
                                     type: 'iframe',
                                     caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
                                     options: {
-                                        height: 300,
-                                        width: 500
+                                        height: 'auto',
+                                        width: '80%',
+                                        height: '80%'
                                     }
                                 }
                             {%  endif %}
                         {%  endwith %}
                         {% if not forloop.last %}, {% endif %}
                     {% endfor %}
-                ]);
+                ],
+               { skin: 'light', fullStretchTypes: 'image, flash, video, iframe'}
+               );
 
 
             });
