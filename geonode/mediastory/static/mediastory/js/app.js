@@ -22,7 +22,7 @@ $("#about-btn").click(function() {
 });
 
 $("#full-extent-btn").click(function() {
-  map.fitBounds(territories.getBounds());
+  //map.fitBounds(territories.getBounds());
   $(".navbar-collapse.in").collapse("hide");
   return false;
 });
@@ -342,7 +342,7 @@ $(document).one("ajaxStop", function () {
   $("#loading").hide();
   sizeLayerControl();
   /* Fit map to territory bounds */
-  map.fitBounds(territories.getBounds());
+  //map.fitBounds(territories.getBounds());
   featureList = new List("features", {valueNames: ["feature-name"]});
   featureList.sort("feature-name", {order:"asc"});
 
