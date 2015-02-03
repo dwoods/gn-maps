@@ -1,4 +1,4 @@
-var map, featureList, boroughSearch = [], locationSearch = [];
+var map, featureList, territorySearch = [], locationSearch = [];
 
 $(window).resize(function() {
   sizeLayerControl();
@@ -22,7 +22,7 @@ $("#about-btn").click(function() {
 });
 
 $("#full-extent-btn").click(function() {
-  map.fitBounds(boroughs.getBounds());
+  map.fitBounds(territories.getBounds());
   $(".navbar-collapse.in").collapse("hide");
   return false;
 });
@@ -129,6 +129,27 @@ var highlightStyle = {
   radius: 10
 };
 
+var territories = L.geoJson(null, {
+  style: function (feature) {
+    return {
+      color: "black",
+      fill: false,
+      opacity: 1,
+      clickable: false
+    };
+  },
+  onEachFeature: function (feature, layer) {
+    territorySearch.push({
+      name: "GN Territories",
+      source: "Territories",
+      id: L.stamp(layer),
+      bounds: layer.getBounds()
+    });
+  }
+});
+$.getJSON("http://maps.gwanak.info/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo:gn_territories&maxFeatures=50&outputFormat=json", function (data) {
+  territories.addData(data);
+});
 
 /* Single marker cluster layer to hold all clusters */
 var markerClusters = new L.MarkerClusterGroup({
@@ -187,7 +208,7 @@ $.getJSON("{% url 'location_geodata' %}", function (data) {
 map = L.map("map", {
   zoom: 9,
   center: [50.86617, -126.95078 ],
-  layers: [mapquestOSM, markerClusters, highlight],
+  layers: [mapquestOSM, territories, markerClusters, highlight],
   zoomControl: false,
   attributionControl: false
 });
@@ -288,11 +309,11 @@ var baseLayers = {
 };
 
 var groupedOverlays = {
-  "Points of Interest": {
+  "Layers": {
     "<img src='{{ STATIC_URL }}mediastory/images/location.png' width='24' height='28'>&nbsp;Locations": locationLayer,
   },
   "Reference": {
-//    "Boroughs": boroughs,
+    "Territory": territories
   }
 };
 
@@ -320,18 +341,18 @@ $("#featureModal").on("hidden.bs.modal", function (e) {
 $(document).one("ajaxStop", function () {
   $("#loading").hide();
   sizeLayerControl();
-  /* Fit map to boroughs bounds */
-  map.fitBounds(boroughs.getBounds());
+  /* Fit map to territory bounds */
+  map.fitBounds(territories.getBounds());
   featureList = new List("features", {valueNames: ["feature-name"]});
   featureList.sort("feature-name", {order:"asc"});
 
-  var boroughsBH = new Bloodhound({
-    name: "Boroughs",
+  var territoriesBH = new Bloodhound({
+    name: "Territories",
     datumTokenizer: function (d) {
       return Bloodhound.tokenizers.whitespace(d.name);
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: boroughSearch,
+    local: territorySearch,
     limit: 10
   });
 
@@ -377,6 +398,7 @@ $(document).one("ajaxStop", function () {
     },
     limit: 10
   });
+  territoriesBH.initialize();
   locationsBH.initialize();
   geonamesBH.initialize();
 

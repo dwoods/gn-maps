@@ -38,14 +38,15 @@
                             {% if modeltype == "ExternalVideoMediaItem" %}
                                 {% video item.video as v %}
                                     {
-                                        URL: 'http://www.youtube.com/embed/{{ v.code }}?autoplay=1&autohide=1&border=0&egm=0&showinfo=0',
+                                        URL: 'http://www.youtube.com/embed/{{ v.code }}?autoplay=0&autohide=1&border=0&egm=0&showinfo=0',
                                         title: '{{ item.title }}',
                                         caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
                                         type: 'iframe',
                                         options: {
                                             thumbnail: 'http://img.youtube.com/vi/{{ v.code }}/1.jpg',
                                             icon: 'video',
-                                            width: 800
+                                            width: 800,
+                                            autoplay: false
                                         }
                                     }
                                 {% endvideo %}
