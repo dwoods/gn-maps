@@ -14,7 +14,7 @@ class Location(models.Model):
     name = models.CharField("Name", max_length=100, blank=False, null=False)
     description = models.TextField("Description", blank=True, null=True)
     population = models.IntegerField("Population", blank=True, null=True)
-    #position = GeopositionField()
+    #position = GeopositionField(null=True, blank=True)
     geom = PointField()
 
     @property

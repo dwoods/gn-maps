@@ -10,18 +10,15 @@
 
                     <p>{{ location.description|safe }}</p>
 
-                    <p><a id="closebtn" class="btn btn-primary" href="#" title="Go back to the map"
-                          style="margin: 15px 15px 0 15px;">&lt; Back to map</a></p>
-
-                    <p><a id="viewbtn" class="btn btn-primary" href="#" title="View media"
+                    <p><a id="viewbtn" class="btn btn-lg btn-primary" href="#" title="View media"
                           style="margin: 15px 15px 0 15px;">View Media</a></p>
 
+                    <p><a id="closebtn" class="btn btn-default" href="#" title="Go back to the map"
+                          style="margin: 15px 15px 0 15px;">Close</a></p>
                 </div>
             </div>
         </div>
     </div>
-
-
 {% endblock %}
 
 {% block extra_script %}
@@ -29,7 +26,7 @@
         $(document).ready(function () {
 
             $("#closebtn").click(function () {
-                frameWarp.hide();
+                window.close();
             });
 
             $("#viewbtn").click(function (event) {
@@ -83,7 +80,7 @@
                                 {
                                     URL: "{% url 'mediaitem_detail' item.id %}",
                                     title: '{{ item.title }}',
-                                    type: 'iframe',
+                                    type: 'ajax',
                                     caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
                                     options: {
                                         width: 800
@@ -93,10 +90,11 @@
                                 {
                                     URL: "{% url 'mediaitem_detail' item.id %}",
                                     title: '{{ item.title }}',
-                                    type: 'iframe',
+                                    type: 'ajax',
                                     caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
                                     options: {
-                                        width: 800
+                                        width: 800,
+                                        height: 500
                                     }
                                 }
                             {%  endif %}
