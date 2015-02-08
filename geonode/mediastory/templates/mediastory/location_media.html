@@ -1,6 +1,14 @@
 {% extends "mediastory/base.html" %}
 {% load polytype %}{% load embed_video_tags %}{% load fb_versions %}
 
+{% block extra_head %}
+<style type="text/css">
+{#    .thumbnails .thumbnail { max-width: 50%;}#}
+    .thumbnails li { width: auto; max-width: 300px; border: 2px solid #D3D6FF; border-radius: 4px; padding: 10px; background-color: #eeeeee;}
+    .thumbnails .caption, .thumbnails .alert {  }
+</style>
+{% endblock %}
+
 {% block middle %}
     <div class="jumbotron">
         <div class="container">
@@ -10,15 +18,101 @@
 
                     <p>{{ location.description|safe }}</p>
 
-                    <p><a id="viewbtn" class="btn btn-lg btn-primary" href="#" title="View media"
-                          style="margin: 15px 15px 0 15px;">View Media</a></p>
-
                     <p><a id="closebtn" class="btn btn-default" href="#" title="Go back to the map"
                           style="margin: 15px 15px 0 15px;">Close</a></p>
                 </div>
             </div>
         </div>
     </div>
+
+
+		<ul class="thumbnails" style="list-style: none;">
+
+            {% for item in media_items %}
+                {% with item|modeltype as modeltype %}
+
+                     {% if modeltype == "ExternalVideoMediaItem" %}
+                                {% video item.video as v %}
+                                <li class="video video-ext">
+                                    <a href="http://www.youtube.com/watch?v={{ v.code }}" class="thumbnail">
+                                        <img src="http://img.youtube.com/vi/{{ v.code }}/1.jpg" alt="iLightBox - Inline Image Gallery" />
+                                    </a>
+                                    <div class="caption">
+                                        <h3>{{ item.title }}</h3>
+                                        <p>{{ item.description|safe|striptags|escapejs }}</p>
+                                    </div>
+                                    {% if item.attribution %}
+                                    <div class="alert alert-info" align="left">
+                                        {{ item.attribution }}
+                                    </div>
+                                    {% endif %}
+                                </li>
+                                {% endvideo %}
+                            {% elif modeltype == "VideoMediaItem" %}
+                                <li class="video video-int">
+                                    <a href="{{ item.video_file_mp4 }}" class="thumbnail">
+                                        <img src="{{  item.thumbnail_url }}" alt="iLightBox - Inline Image Gallery" />
+                                    </a>
+                                    <div class="caption">
+                                        <h3>{{ item.title }}</h3>
+                                        <p>{{ item.description|safe|striptags|escapejs }}</p>
+                                    </div>
+                                    {% if item.attribution %}
+                                    <div class="alert alert-info" align="left">
+                                        {{ item.attribution }}
+                                    </div>
+                                    {% endif %}
+                                </li>
+                            {% elif modeltype == 'ImageMediaItem' %}
+                                 <li class="image">
+                                     <a href="{% version item.image 'xtra-big' %}" class="thumbnail">
+                                         <img src="{% version item.image 'medium' %}" alt="iLightBox - Inline Image Gallery" />
+                                     </a>
+                                     <div class="caption">
+                                         <h3>{{ item.title }}</h3>
+                                         <p>{{ item.description|safe|striptags|escapejs }}</p>
+                                     </div>
+                                     {% if item.attribution %}
+                                         <div class="alert alert-info" align="left">
+                                             {{ item.attribution }}
+                                         </div>
+                                     {% endif %}
+                                 </li>
+                            {% elif modeltype == 'TextMediaItem' %}
+                                 <li class="text">
+                                     <a href="{% url 'mediaitem_detail' item.id %}" class="thumbnail">
+                                         <img src="{{  item.thumbnail_url }}" alt="iLightBox - Inline Image Gallery" />
+                                     </a>
+                                     <div class="caption">
+                                         <h3>{{ item.title }}</h3>
+                                         <p>{{ item.description|safe|striptags|escapejs }}</p>
+                                     </div>
+                                     {% if item.attribution %}
+                                         <div class="alert alert-info" align="left">
+                                             {{ item.attribution }}
+                                         </div>
+                                     {% endif %}
+                                 </li>
+                            {% elif modeltype == 'AudioMediaItem' %}
+                         <li class="audio">
+                             <a href="{% url 'mediaitem_detail' item.id %}" class="thumbnail">
+                                 <img src="{{  item.thumbnail_url }}" alt="iLightBox - Inline Image Gallery" />
+                             </a>
+                             <div class="caption">
+                                 <h3>{{ item.title }}</h3>
+                                 <p>{{ item.description|safe|striptags|escapejs }}</p>
+                             </div>
+                             {% if item.attribution %}
+                                 <div class="alert alert-info" align="left">
+                                     {{ item.attribution }}
+                                 </div>
+                             {% endif %}
+                         </li>
+                            {%  endif %}
+                {% endwith %}
+            {%  endfor %}
+
+        </ul>
 {% endblock %}
 
 {% block extra_script %}
@@ -29,6 +123,38 @@
                 window.close();
             });
 
+            $('.thumbnails').masonry({
+              columnWidth: 150,
+              itemSelector: 'li',
+              gutter: 5
+            });
+
+            $('.video').iLightBox({
+                   skin: 'metro-black',
+                   mousewheel: false,
+                   width: 800,
+                   caption: {
+                       start: true,
+                       show: 'mouseleave',
+                       hide: 'mouseenter'
+                   },
+                   path: 'horizontal',
+                   smartRecognition: true
+            })
+
+            $('.image').iLightBox({
+                skin: 'metro-black',
+                mousewheel: false,
+                width: 800,
+                caption: {
+                    start: true,
+                    show: 'mouseleave',
+                    hide: 'mouseenter'
+                },
+                path: 'horizontal',
+                smartRecognition: true
+            })
+
             $("#viewbtn").click(function (event) {
                event.preventDefault();
 
@@ -38,16 +164,15 @@
                             {% if modeltype == "ExternalVideoMediaItem" %}
                                 {% video item.video as v %}
                                     {
-                                        URL: 'http://www.youtube.com/embed/{{ v.code }}?autoplay=0&autohide=1&border=0&egm=0&showinfo=0',
+                                        URL: 'http://www.youtube.com/watch?v={{ v.code }}',
                                         title: '{{ item.title }}',
-                                        caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
-                                        type: 'iframe',
-                                        options: {
-                                            thumbnail: 'http://img.youtube.com/vi/{{ v.code }}/1.jpg',
-                                            icon: 'video',
-                                            width: 800,
-                                            autoplay: false
-                                        }
+                                        caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}'
+{#                                        options: {#}
+{#                                            thumbnail: 'http://img.youtube.com/vi/{{ v.code }}/1.jpg',#}
+{#                                            icon: 'video',#}
+{#                                            width: 800,#}
+{#                                            autoplay: false#}
+{#                                        }#}
                                     }
                                 {% endvideo %}
                             {% elif modeltype == "VideoMediaItem" %}
@@ -63,11 +188,12 @@
                                         html5video: {
                                             h264: '{{ item.video_file_mp4 }}',
                                             webm: '{{ item.video_file_webm }}',
-{#                                            poster: '/path/video-poster.jpg',#}
+                                            poster: '{{  item.preview_url }}',
                                             controls: true,
                                             autoplay: false,
                                             preload: 'auto'
-                                        }
+                                        },
+                                        thumbnail: '{{  item.thumbnail_url }}'
                                     }
                                 }
                             {% elif modeltype == 'ImageMediaItem' %}
@@ -95,7 +221,8 @@
                                     caption: '{{ item.description|safe|striptags|truncatewords_html:150|escapejs }}{% if item.attribution %}<p><em>Attribution: {{ item.attribution }}</em></p>{% endif %}',
                                     options: {
                                         width: 800,
-                                        height: 500
+                                        height: 500,
+                                        thumbnail: '{{ item.thumbnail_url }}'
                                     }
                                 }
                             {%  endif %}
@@ -104,13 +231,17 @@
                     {% endfor %}
                ],
                {
-                   skin: 'mac',
+                   skin: 'metro-black',
                    fullStretchTypes: 'image, flash, video',
                    mousewheel: false,
-                   styles: {
-                       pageOffsetX: 30,
-                       pageOffsetY: 30
-                   }
+                   width: 800,
+                   caption: {
+                       start: true,
+                       show: 'mouseleave',
+                       hide: 'mouseenter'
+                   },
+                   path: 'horizontal',
+                   smartRecognition: true
 
                }
 

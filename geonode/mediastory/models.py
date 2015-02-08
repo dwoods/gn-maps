@@ -1,4 +1,7 @@
+import cStringIO, hashlib, math, os, subprocess, time
+from PIL import Image, ImageOps
 from django.conf import settings
+from django.core.files.base import ContentFile
 from django.db import models
 from embed_video.backends import detect_backend, UnknownBackendException
 from embed_video.fields import EmbedVideoField
@@ -64,7 +67,7 @@ class TextMediaItem(MediaItem):
         return settings.STATIC_URL + 'mediastory/images/text-icon.png'
 
     def thumbnail(self):
-        return '<img src="%s" />' % self.thumnail_url
+        return '<img src="%s" style="height: 60px;" />' % self.thumnail_url
     thumbnail.allow_tags = True
 
 
@@ -88,7 +91,7 @@ class ImageMediaItem(MediaItem):
             return ""
 
     def thumbnail(self):
-        return '<img src="%s" />' % self.thumbnail_url
+        return '<img src="%s" />' % self.image.url_thumbnail
     thumbnail.allow_tags = True
 
 class AudioMediaItem(MediaItem):
@@ -104,11 +107,11 @@ class AudioMediaItem(MediaItem):
         return "Audio"
 
     @property
-    def thumnail_url(self):
+    def thumbnail_url(self):
         return settings.STATIC_URL + 'mediastory/images/music-icon.png'
 
     def thumbnail(self):
-        return '<img src="%s" />' % self.thumnail_url
+        return '<img src="%s" style="height: 60px;" />' % self.thumbnail_url
     thumbnail.allow_tags = True
 
 
@@ -142,6 +145,8 @@ class VideoMediaItem(MediaItem):
     # video_file = FileBrowseField("Video File", max_length=200, format="Video", blank=False, null=False)
     video_file_webm = FileBrowseField("Video File (webm)", max_length=200, format="Video", blank=False, null=True)
     video_file_mp4 = FileBrowseField("Video File (mp4)", max_length=200, format="Video", blank=False, null=True)
+    video_preview_image = models.ImageField("Video Preview Image", upload_to="video_thumbnails", max_length=200, blank=False, null=True)
+
     text = models.TextField(help_text='Story text', blank=True, null=True, default=None)
 
     class Meta:
@@ -152,12 +157,23 @@ class VideoMediaItem(MediaItem):
         return "Video"
 
     @property
+    def preview_url(self):
+        if self.video_preview_image:
+            return self.video_preview_image.url
+        else:
+            return ''
+
+    @property
     def thumbnail_url(self):
-        return ''
+        if self.video_preview_image:
+            return self.video_preview_image.url
+        else:
+            return ''
 
     def thumbnail(self):
-        return ''
+        return '<img src="%s" style="height: 60px;" />' % self.thumbnail_url
     thumbnail.allow_tags = True
+
 
 
 

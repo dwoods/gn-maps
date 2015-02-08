@@ -123,8 +123,7 @@
           </div>
           <div class="modal-body">
             <ul class="nav nav-tabs" id="aboutTabs">
-              <li class="active"><a href="#about" data-toggle="tab"><i class="fa fa-question-circle"></i>&nbsp;About the project</a></li>
-              <li><a href="#contact" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;Contact us</a></li>
+              <li class="active"><a href="#contact" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;Contact us</a></li>
               <li><a href="#disclaimer" data-toggle="tab"><i class="fa fa-exclamation-circle"></i>&nbsp;Disclaimer</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i>&nbsp;Metadata <b class="caret"></b></a>
@@ -134,25 +133,21 @@
               </li>
             </ul>
             <div class="tab-content" id="aboutTabsContent">
-              <div class="tab-pane fade active in" id="about">
-                <p>A simple mapping site for viewing data and media from villages throughout the Gwa'sala-'Nakwaxda'xw Nation.</p>
-                <div class="panel panel-primary">
-                  <div class="panel-heading">Features</div>
-                  <ul class="list-group">
-                    <li class="list-group-item">Fullscreen mobile-friendly map template with responsive navbar and modal placeholders</li>
-                    <li class="list-group-item">jQuery loading of external GeoJSON files</li>
-                    <li class="list-group-item">Logical multiple layer marker clustering via the <a href="https://github.com/Leaflet/Leaflet.markercluster" target="_blank">leaflet marker cluster plugin</a></li>
-                    <li class="list-group-item">Elegant client-side multi-layer feature search with autocomplete using <a href="http://twitter.github.io/typeahead.js/" target="_blank">typeahead.js</a></li>
-                    <li class="list-group-item">Responsive sidebar feature list synced with map bounds, which includes sorting and filtering via <a href="http://listjs.com/" target="_blank">list.js</a></li>
-                    <li class="list-group-item">Marker icons included in grouped layer control via the <a href="https://github.com/ismyrnow/Leaflet.groupedlayercontrol" target="_blank">grouped layer control plugin</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div id="disclaimer" class="tab-pane fade text-danger">
-                <p>The data provided on this site is for informational and planning purposes only.</p>
-{#                <p>Absolutely no accuracy or completeness guarantee is implied or intended. All information on this map is subject to such variations and corrections as might result from a complete title search and/or accurate field survey.</p>#}
-              </div>
-              <div class="tab-pane fade" id="contact">
+{#              <div class="tab-pane fade active in" id="about">#}
+{#                <p>A simple mapping site for viewing data and media from villages throughout the Gwa'sala-'Nakwaxda'xw Nation.</p>#}
+{#                <div class="panel panel-primary">#}
+{#                  <div class="panel-heading">Features</div>#}
+{#                  <ul class="list-group">#}
+{#                    <li class="list-group-item">Fullscreen mobile-friendly map template with responsive navbar and modal placeholders</li>#}
+{#                    <li class="list-group-item">jQuery loading of external GeoJSON files</li>#}
+{#                    <li class="list-group-item">Logical multiple layer marker clustering via the <a href="https://github.com/Leaflet/Leaflet.markercluster" target="_blank">leaflet marker cluster plugin</a></li>#}
+{#                    <li class="list-group-item">Elegant client-side multi-layer feature search with autocomplete using <a href="http://twitter.github.io/typeahead.js/" target="_blank">typeahead.js</a></li>#}
+{#                    <li class="list-group-item">Responsive sidebar feature list synced with map bounds, which includes sorting and filtering via <a href="http://listjs.com/" target="_blank">list.js</a></li>#}
+{#                    <li class="list-group-item">Marker icons included in grouped layer control via the <a href="https://github.com/ismyrnow/Leaflet.groupedlayercontrol" target="_blank">grouped layer control plugin</a></li>#}
+{#                  </ul>#}
+{#                </div>#}
+{#              </div>#}
+                  <div class="tab-pane fade active in" id="contact">
                 <form id="contact-form">
                   <div class="well well-sm">
                     <div class="row">
@@ -183,6 +178,11 @@
                   </div>
                 </form>
               </div>
+              <div id="disclaimer" class="tab-pane fade text-danger">
+                <p>The data provided on this site is for informational and planning purposes only.</p>
+{#                <p>Absolutely no accuracy or completeness guarantee is implied or intended. All information on this map is subject to such variations and corrections as might result from a complete title search and/or accurate field survey.</p>#}
+              </div>
+
               <div class="tab-pane fade" id="locations-tab">
                 <p>Location data courtesy of <a href="#" target="_blank">[Some Source]</a></p>
               </div>
