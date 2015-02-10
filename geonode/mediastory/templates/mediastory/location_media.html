@@ -35,7 +35,7 @@
                                 {% video item.video as v %}
                                 <li class="video video-ext">
                                     <a href="http://www.youtube.com/watch?v={{ v.code }}" class="thumbnail">
-                                        <img src="http://img.youtube.com/vi/{{ v.code }}/1.jpg" alt="iLightBox - Inline Image Gallery" />
+                                        <img src="http://img.youtube.com/vi/{{ v.code }}/1.jpg" alt="Preview Image of Video" />
                                     </a>
                                     <div class="caption">
                                         <h3>{{ item.title }}</h3>
@@ -49,7 +49,7 @@
                             {% elif modeltype == "VideoMediaItem" %}
                                 <li class="video video-int">
                                     <a href="{{ item.video_file_mp4 }}" class="thumbnail">
-                                        <img src="{{  item.thumbnail_url }}" alt="iLightBox - Inline Image Gallery" />
+                                        <img src="{{  item.thumbnail_url }}" alt="Preview image of Video" />
                                     </a>
                                     <div class="caption">
                                         <h3>{{ item.title }}</h3>
@@ -67,7 +67,7 @@
                             {% elif modeltype == 'ImageMediaItem' %}
                                  <li class="image">
                                      <a href="{% version item.image 'xtra-big' %}" class="thumbnail">
-                                         <img src="{% version item.image 'medium' %}" alt="iLightBox - Inline Image Gallery" />
+                                         <img src="{% version item.image 'medium' %}" alt="Preview Image" />
                                      </a>
                                      <div class="caption">
                                          <h3>{{ item.title }}</h3>
@@ -85,7 +85,7 @@
                             {% elif modeltype == 'TextMediaItem' %}
                                  <li class="text">
                                      <a href="{% url 'mediaitem_detail' item.id %}" class="thumbnail">
-                                         <img src="{{  item.thumbnail_url }}" alt="iLightBox - Inline Image Gallery" />
+                                         <img src="{{  item.thumbnail_url }}" alt="Preview image of Document" />
                                      </a>
                                      <div class="caption">
                                          <h3>{{ item.title }}</h3>
@@ -102,7 +102,7 @@
                             {% elif modeltype == 'AudioMediaItem' %}
                          <li class="audio">
                              <a href="{% url 'mediaitem_detail' item.id %}" class="thumbnail">
-                                 <img src="{{  item.thumbnail_url }}" alt="iLightBox - Inline Image Gallery" />
+                                 <img src="{{  item.thumbnail_url }}" alt="Preview image of Audio File" />
                              </a>
                              <div class="caption">
                                  <h3>{{ item.title }}</h3>
