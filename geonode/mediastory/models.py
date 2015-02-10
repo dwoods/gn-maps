@@ -63,11 +63,11 @@ class TextMediaItem(MediaItem):
         return "Text"
 
     @property
-    def thumnail_url(self):
+    def thumbnail_url(self):
         return settings.STATIC_URL + 'mediastory/images/document_placeholder.png'
 
     def thumbnail(self):
-        return '<img src="%s" style="height: 60px;" />' % self.thumnail_url
+        return '<img src="%s" style="height: 60px;" />' % self.thumbnail_url
     thumbnail.allow_tags = True
 
 
