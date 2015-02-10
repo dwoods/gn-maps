@@ -64,7 +64,7 @@ class TextMediaItem(MediaItem):
 
     @property
     def thumnail_url(self):
-        return settings.STATIC_URL + 'mediastory/images/text-icon.png'
+        return settings.STATIC_URL + 'mediastory/images/document_placeholder.png'
 
     def thumbnail(self):
         return '<img src="%s" style="height: 60px;" />' % self.thumnail_url
@@ -108,7 +108,7 @@ class AudioMediaItem(MediaItem):
 
     @property
     def thumbnail_url(self):
-        return settings.STATIC_URL + 'mediastory/images/music-icon.png'
+        return settings.STATIC_URL + "mediastory/images/audio_placeholder.png"
 
     def thumbnail(self):
         return '<img src="%s" style="height: 60px;" />' % self.thumbnail_url
@@ -161,14 +161,14 @@ class VideoMediaItem(MediaItem):
         if self.video_preview_image:
             return self.video_preview_image.url
         else:
-            return ''
+            return settings.STATIC_URL + "images/video_placeholder.png"
 
     @property
     def thumbnail_url(self):
         if self.video_preview_image:
             return self.video_preview_image.url
         else:
-            return ''
+            return settings.STATIC_URL + "images/video_placeholder.png"
 
     def thumbnail(self):
         return '<img src="%s" style="height: 60px;" />' % self.thumbnail_url

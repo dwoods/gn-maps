@@ -34,7 +34,16 @@
                      {% if modeltype == "ExternalVideoMediaItem" %}
                                 {% video item.video as v %}
                                 <li class="video video-ext">
-                                    <a href="http://www.youtube.com/watch?v={{ v.code }}" class="thumbnail">
+                                    <a href="http://www.youtube.com/embed/{{ v.code }}?autohide=1&border=0&egm=0&showinfo=0&showsearch=0" class="thumbnail"
+                                        data-title="{{ item.title }}"
+                                        data-caption="{{ item.description|safe|striptags|escapejs }}"
+                                        data-type="iframe"
+                                        data-options="
+                                        thumbnail: '{{ item.thumbnail_url }}',
+                                        width: 800,
+                                        height: 400,
+                                        icon: 'video'
+                                        ">
                                         <img src="http://img.youtube.com/vi/{{ v.code }}/1.jpg" alt="Preview Image of Video" />
                                     </a>
                                     <div class="caption">
@@ -48,7 +57,23 @@
                                 {% endvideo %}
                             {% elif modeltype == "VideoMediaItem" %}
                                 <li class="video video-int">
-                                    <a href="{{ item.video_file_mp4 }}" class="thumbnail">
+                                    <a href="{{ item.video_file_mp4 }}" class="thumbnail"
+                                        data-title="{{ item.title }}"
+                                        data-caption="{{ item.description|safe|striptags|escapejs }}"
+                                        data-type="video"
+                                        data-options="
+                                          width: 800,
+                                            videoType: 'video/mp4',
+                                            html5video: {
+                                                h264: '{{ item.video_file_mp4 }}',
+                                                webm: '{{ item.video_file_webm }}',
+                                                poster: '{{  item.preview_url }}',
+                                                controls: true,
+                                                autoplay: false,
+                                                preload: 'auto'
+                                            },
+                                            thumbnail: '{{  item.thumbnail_url }}'
+                                        ">
                                         <img src="{{  item.thumbnail_url }}" alt="Preview image of Video" />
                                     </a>
                                     <div class="caption">
@@ -66,7 +91,12 @@
                                 </li>
                             {% elif modeltype == 'ImageMediaItem' %}
                                  <li class="image">
-                                     <a href="{% version item.image 'xtra-big' %}" class="thumbnail">
+                                     <a href="{% version item.image 'xtra-big' %}" class="thumbnail"
+                                         data-title="{{ item.title }}"
+                                         data-caption="{{ item.description|safe|striptags|escapejs }}"
+                                         data-options="
+                                         thumbnail: '{{ item.thumbnail_url }}'
+                                         ">
                                          <img src="{% version item.image 'medium' %}" alt="Preview Image" />
                                      </a>
                                      <div class="caption">
@@ -84,7 +114,14 @@
                                  </li>
                             {% elif modeltype == 'TextMediaItem' %}
                                  <li class="text">
-                                     <a href="{% url 'mediaitem_detail' item.id %}" class="thumbnail">
+                                     <a href="{% url 'mediaitem_detail' item.id %}" class="thumbnail"
+                                             data-title="{{ item.title }}"
+                                             data-caption="{{ item.description|safe|striptags|escapejs }}"
+                                             data-options="
+                                                 thumbnail: '{{ item.thumbnail_url }}',
+                                                 width: 640,
+                                                 height:  475
+                                            ">
                                          <img src="{{  item.thumbnail_url }}" alt="Preview image of Document" />
                                      </a>
                                      <div class="caption">
@@ -101,7 +138,14 @@
                                  </li>
                             {% elif modeltype == 'AudioMediaItem' %}
                          <li class="audio">
-                             <a href="{% url 'mediaitem_detail' item.id %}" class="thumbnail">
+                             <a href="{% url 'mediaitem_detail' item.id %}" class="thumbnail"
+                                 data-title="{{ item.title }}"
+                                 data-caption="{{ item.description|safe|striptags|escapejs }}"
+                                 data-options="
+                                 thumbnail: '{{ item.thumbnail_url }}',
+                                 width: 640,
+                                 height: 310
+                                 ">
                                  <img src="{{  item.thumbnail_url }}" alt="Preview image of Audio File" />
                              </a>
                              <div class="caption">

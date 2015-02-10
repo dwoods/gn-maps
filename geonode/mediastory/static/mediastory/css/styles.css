@@ -8433,6 +8433,7 @@ button.close {
 
 .mediaitem-content {
   text-align: center;
+  background-color: #ffffff;
 }
 .mediaitem-content a {
   margin: 50px auto;
