@@ -101,6 +101,12 @@ function syncSidebar() {
 }
 
 /* Basemap Layers */
+var gnMediaMapBase = L.tileLayer.wms("http://maps.gwanak.info/geoserver/opengeo/wms", {
+  layers: 'mm_bg_layers',
+  format: 'image/png',
+  srs: 'EPSG:3005',
+  transparent: true
+});
 var mapquestOSM = L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
   maxZoom: 19,
   subdomains: ["otile1", "otile2", "otile3", "otile4"],
@@ -203,13 +209,18 @@ $.getJSON("{% url 'location_geodata' %}", function (data) {
 });
 
 
-
+var southWest = L.latLng(50.700338, -128.814578),
+    northEast = L.latLng(51.558684, -126.283603),
+    bounds = L.latLngBounds(southWest, northEast);
 
 map = L.map("map", {
-  zoom: 9,
-  center: [50.86617, -126.95078 ],
-  layers: [mapquestOSM, territories, markerClusters, highlight],
-  zoomControl: false,
+  zoom: 10,
+  minZoom: 10,
+  maxZoom: 14,
+  maxBounds: bounds,
+  center: [51.05, -127.1 ],
+  layers: [gnMediaMapBase, markerClusters, highlight],
+  zoomControl: true,
   attributionControl: false
 });
 
@@ -303,18 +314,19 @@ if (document.body.clientWidth <= 767) {
 }
 
 var baseLayers = {
-  "Street Map": mapquestOSM,
-  "Aerial Imagery": mapquestOAM,
-  "Imagery with Streets": mapquestHYB
+  "Media Map Base": gnMediaMapBase
+//  "Street Map": mapquestOSM,
+//  "Aerial Imagery": mapquestOAM,
+//  "Imagery with Streets": mapquestHYB
 };
 
 var groupedOverlays = {
   "Layers": {
-    "<img src='{{ STATIC_URL }}mediastory/images/location.png' width='24' height='28'>&nbsp;Locations": locationLayer,
-  },
-  "Reference": {
-    "Territory": territories
+    "<img src='{{ STATIC_URL }}mediastory/images/location.png' width='24' height='28'>&nbsp;Villages": locationLayer,
   }
+//  "Reference": {
+//    "Territory": territories
+//  }
 };
 
 var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
