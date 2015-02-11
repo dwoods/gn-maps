@@ -220,7 +220,7 @@ map = L.map("map", {
   maxBounds: bounds,
   center: [51.05, -127.1 ],
   layers: [gnMediaMapBase, markerClusters, highlight],
-  zoomControl: true,
+  zoomControl: false,
   attributionControl: false
 });
 
