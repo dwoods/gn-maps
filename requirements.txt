@@ -1,11 +1,12 @@
 Django==1.5.5
-#-e git+git@github.com:dwoods/gn-maps.git@b1d26f7b0723164b97c38baab56a29809d673b50#egg=GeoNode-master
+-e git+git@github.com:dwoods/gn-maps.git@626ee659088e94889b7220a09910c7faac0adf7d#egg=GeoNode-master
 MultipartPostHandler==0.1.0
 OWSLib==0.7.2
 Paver==1.2.2
-Pillow==2.3.0
+Pillow==2.4.0
 Shapely==1.2.17
 South==0.8.4
+Werkzeug==0.9.4
 agon-ratings==0.2
 beautifulsoup4==4.3.2
 dialogos==0.2
@@ -13,21 +14,26 @@ django-activity-stream==0.4.4
 django-admin-tools==0.4.0
 django-announcements==1.0.2
 django-appconf==0.5
+django-avatar==2.0
+django-compressor==1.4
 django-downloadview==1.2
 django-embed-video==0.7
 django-extensions==1.3.3
+django-filer==0.9.4
 django-forms-bootstrap==2.0.3.post1
 django-friendly-tag-loader==1.1
 django-geoexplorer==3.0.5
-django-geoposition
-django-leaflet
+django-geojson==2.6.0
+django-geoposition==0.1.5
 django-jsonfield==0.9.10
--e git+https://github.com/dwoods/django-media-manager.git#egg=django_media_manager-master
+django-leaflet==0.15.2
+-e git+https://github.com/dwoods/django-media-manager.git@9c948fcba630be7ee42c4c0672cb181bfcb36bf5#egg=django_media_manager-master
 django-mptt==0.5.5
 django-nose==1.2
 django-notification==1.0
 django-pagination==1.0.7
 django-polymorphic==0.5.3
+django-settingsjs==0.1.5
 django-suit==0.2.5
 django-suit-redactor==0.0.2
 django-taggit==0.10a1
@@ -41,10 +47,12 @@ geonode-avatar==2.1.1
 gisdata==0.5.4
 gsconfig==0.6.7
 httplib2==0.8
+jsonfield==1.0.0
 lxml==3.3.0
 nose==1.3.0
 pinax-theme-bootstrap==3.0a11
 pinax-theme-bootstrap-account==1.0b2
+psycopg2==2.5.2
 pycsw==1.6.1
 pyproj==1.9.3
 python-dateutil==2.1
@@ -55,4 +63,3 @@ transifex-client==0.10
 user-messages==0.1.1
 wsgiref==0.1.2
 yolk==0.4.3
-
