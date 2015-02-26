@@ -62,3 +62,8 @@
 //  }
 }
 
+// hide the layers control, all are always shown for now
+.leaflet-control-layers {
+  display: none;
+}
+

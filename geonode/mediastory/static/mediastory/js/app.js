@@ -106,6 +106,7 @@ var gnMediaMapBase = L.tileLayer.wms("http://maps.gwanak.info/geoserver/opengeo/
   format: 'image/png',
   srs: 'EPSG:3005',
   transparent: true
+
 });
 var mapquestOSM = L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
   maxZoom: 19,
@@ -153,9 +154,9 @@ var territories = L.geoJson(null, {
     });
   }
 });
-$.getJSON("http://maps.gwanak.info/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo:gn_territories&maxFeatures=50&outputFormat=json", function (data) {
-  territories.addData(data);
-});
+//$.getJSON("http://maps.gwanak.info/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo:gn_territories&maxFeatures=50&outputFormat=json", function (data) {
+//  territories.addData(data);
+//});
 
 /* Single marker cluster layer to hold all clusters */
 var markerClusters = new L.MarkerClusterGroup({
@@ -185,9 +186,15 @@ var locations = L.geoJson(null, {
       var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.name + "</td></tr>" + "<tr><th>Description</th><td>" + feature.properties.description + "</td></tr>" + "<tr><th>Population</th><td>" + feature.properties.population + "</td></tr>" + "<tr><th>Media</th><td><a class='url-break btn btn-primary' href='" + feature.properties.media_url + "' target='_blank'>" + 'View Site Page' + "</a></td></tr>" + "</table>";
       layer.on({
         click: function (e) {
-          $("#feature-title").html(feature.properties.name);
-          $("#feature-info").html(content);
-          $("#featureModal").modal("show");
+
+          // Show Modal with info & link
+          //$("#feature-title").html(feature.properties.name);
+          //$("#feature-info").html(content);
+          //$("#featureModal").modal("show");
+
+          // Just open media page
+          window.open(feature.properties.media_url, '_blank');
+
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
         }
       });
@@ -315,18 +322,12 @@ if (document.body.clientWidth <= 767) {
 
 var baseLayers = {
   "Media Map Base": gnMediaMapBase
-//  "Street Map": mapquestOSM,
-//  "Aerial Imagery": mapquestOAM,
-//  "Imagery with Streets": mapquestHYB
 };
 
 var groupedOverlays = {
   "Layers": {
     "<img src='{{ STATIC_URL }}mediastory/images/location.png' width='24' height='28'>&nbsp;Villages": locationLayer,
   }
-//  "Reference": {
-//    "Territory": territories
-//  }
 };
 
 var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {

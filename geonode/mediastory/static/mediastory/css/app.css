@@ -68,6 +68,8 @@ input[type="radio"], input[type="checkbox"] {
 }
 .leaflet-control-layers {
   overflow: auto;
+  /* Hide the layers control for now */
+  display: none;
 }
 .leaflet-control-layers label {
   font-weight: normal;
